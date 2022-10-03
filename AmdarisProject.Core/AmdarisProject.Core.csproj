@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AmdarisProject.Common\AmdarisProject.Common.csproj" />
+    <ProjectReference Include="..\AmdarisProject.DataAccess\AmdarisProject.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>
