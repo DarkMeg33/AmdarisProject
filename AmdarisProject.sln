@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmdarisProject.Api", "AmdarisProject.Api\AmdarisProject.Api.csproj", "{7B56D8DB-AC62-4F48-9B0E-AD21907906CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmdarisProject.Api", "AmdarisProject.Api\AmdarisProject.Api.csproj", "{7B56D8DB-AC62-4F48-9B0E-AD21907906CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmdarisProject.Domain", "AmdarisProject.Domain\AmdarisProject.Domain.csproj", "{28A721BC-9B85-4F5B-8ECC-F9F33D252A61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmdarisProject.DataAccess", "AmdarisProject.DataAccess\AmdarisProject.DataAccess.csproj", "{E83BF806-6CC6-4DFB-B985-B7A22D378256}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmdarisProject.Core", "AmdarisProject.Core\AmdarisProject.Core.csproj", "{D918D91E-8C25-483F-84AD-768A1A7E6719}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmdarisProject.Common", "AmdarisProject.Common\AmdarisProject.Common.csproj", "{EDA79566-5B96-480C-A397-466B84BAFBBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{7B56D8DB-AC62-4F48-9B0E-AD21907906CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B56D8DB-AC62-4F48-9B0E-AD21907906CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B56D8DB-AC62-4F48-9B0E-AD21907906CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28A721BC-9B85-4F5B-8ECC-F9F33D252A61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28A721BC-9B85-4F5B-8ECC-F9F33D252A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28A721BC-9B85-4F5B-8ECC-F9F33D252A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28A721BC-9B85-4F5B-8ECC-F9F33D252A61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E83BF806-6CC6-4DFB-B985-B7A22D378256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E83BF806-6CC6-4DFB-B985-B7A22D378256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E83BF806-6CC6-4DFB-B985-B7A22D378256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E83BF806-6CC6-4DFB-B985-B7A22D378256}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D918D91E-8C25-483F-84AD-768A1A7E6719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D918D91E-8C25-483F-84AD-768A1A7E6719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D918D91E-8C25-483F-84AD-768A1A7E6719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D918D91E-8C25-483F-84AD-768A1A7E6719}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDA79566-5B96-480C-A397-466B84BAFBBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDA79566-5B96-480C-A397-466B84BAFBBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDA79566-5B96-480C-A397-466B84BAFBBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDA79566-5B96-480C-A397-466B84BAFBBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
