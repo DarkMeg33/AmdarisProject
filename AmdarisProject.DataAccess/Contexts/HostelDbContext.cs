@@ -1,11 +1,12 @@
-﻿using AmdarisProject.Domain;
+﻿using AmdarisProject.DataAccess.EntitiesConfigurations;
+using AmdarisProject.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace AmdarisProject.DataAccess.Contexts
 {
     public class HostelDbContext : DbContext
     {
-        public HostelDbContext(DbContextOptions options) : base(options)
+        public HostelDbContext(DbContextOptions<HostelDbContext> options) : base(options)
         {
             
         }
@@ -15,6 +16,7 @@ namespace AmdarisProject.DataAccess.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new HostelConfiguration());
         }
     }
 }

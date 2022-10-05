@@ -44,9 +44,9 @@ namespace AmdarisProject.DataAccess.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteByIdAsync(int id)
+        public async Task DeleteByIdAsync(T entity)
         {
-            _dbSet.Remove(await GetByIdAsync(id));
+            _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
         }
 

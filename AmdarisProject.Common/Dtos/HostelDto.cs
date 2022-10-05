@@ -2,5 +2,6 @@
 {
     public class HostelDto
     {
+        public int HostelNumber { get; set; }
     }
 }
