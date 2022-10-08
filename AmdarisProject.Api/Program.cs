@@ -1,3 +1,4 @@
+using AmdarisProject.Common.Attributes;
 using AmdarisProject.Core;
 using AmdarisProject.Core.Interfaces;
 using AmdarisProject.Core.Profiles;
@@ -12,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(o => o.Filters.Add(typeof(ApiExceptionFilterAttribute)));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

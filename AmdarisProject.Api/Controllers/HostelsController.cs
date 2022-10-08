@@ -1,14 +1,12 @@
-﻿using AmdarisProject.Common.Dtos;
+﻿using AmdarisProject.Api.Controllers;
 using AmdarisProject.Common.Dtos.Hostel;
 using AmdarisProject.Core.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmdarisProject.Api.Controllersа
 {
     [Route("api/hostels")]
-    [ApiController]
-    public class HostelsController : ControllerBase
+    public class HostelsController : AppControllerBase
     {
         private readonly IHostelService _hostelService;
 
@@ -18,7 +16,7 @@ namespace AmdarisProject.Api.Controllersа
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetHostels()
+        public async Task<IActionResult> GetHostels() //TODO Create pagination, filters 
         {
             var hostels = await _hostelService.GetHostelsAsync();
 
@@ -29,11 +27,6 @@ namespace AmdarisProject.Api.Controllersа
         public async Task<IActionResult> GetHostel(int id)
         {
             var hostel = await _hostelService.GetHostelByIdAsync(id);
-
-            if (hostel is null)
-            {
-                return NotFound();
-            }
 
             return Ok(hostel);
         }

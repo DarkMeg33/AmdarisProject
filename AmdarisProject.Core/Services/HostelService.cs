@@ -1,4 +1,5 @@
 ﻿using AmdarisProject.Common.Dtos.Hostel;
+using AmdarisProject.Common.Exeptions;
 using AmdarisProject.Core.Interfaces;
 using AmdarisProject.DataAccess.Interfaces;
 using AmdarisProject.Domain;
@@ -27,6 +28,11 @@ namespace AmdarisProject.Core.Services
         public async Task<HostelDto> GetHostelByIdAsync(int id)
         {
             var hostel = await _repository.GetByIdAsync(id);
+
+            if (hostel is null)
+            {
+                throw new NotFoundException("Hostel isn't exists.");
+            }
 
             return _mapper.Map<Hostel, HostelDto>(hostel);
         }

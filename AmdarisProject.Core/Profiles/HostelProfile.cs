@@ -9,7 +9,6 @@ namespace AmdarisProject.Core.Profiles
         public HostelProfile()
         {
             CreateMap<Hostel, HostelDto>();
-            CreateMap<Hostel, HostelUpdateDto>();
             CreateMap<HostelUpdateDto, Hostel>();
         }
     }
