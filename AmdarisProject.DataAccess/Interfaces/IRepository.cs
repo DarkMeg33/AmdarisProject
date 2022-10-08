@@ -10,6 +10,6 @@ namespace AmdarisProject.DataAccess.Interfaces
         Task<IList<T>> GetByQueryAsync(Expression<Func<T, bool>> predicate);
         Task CreateAsync(T entity);
         Task UpdateAsync(T entity);
-        Task DeleteByIdAsync(T entity);
+        Task DeleteByIdAsync(int id);
     }
 }

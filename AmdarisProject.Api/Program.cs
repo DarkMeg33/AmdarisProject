@@ -1,3 +1,4 @@
+using AmdarisProject.Core;
 using AmdarisProject.Core.Interfaces;
 using AmdarisProject.Core.Profiles;
 using AmdarisProject.Core.Services;
@@ -20,12 +21,14 @@ builder.Services.AddDbContext<HostelDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
 });
 
-var mapperConfiguration = new MapperConfiguration(options =>
-{
-    options.AddProfile<HostelProfile>();
-});
+//var mapperConfiguration = new MapperConfiguration(options =>
+//{
+//    //options.AddProfile<HostelProfile>();
+//});
 
-builder.Services.AddSingleton(mapperConfiguration.CreateMapper());
+//builder.Services.AddSingleton(mapperConfiguration.CreateMapper());
+
+builder.Services.AddAutoMapper(typeof(CoreAssemblyMarker));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EFCoreRepository<>));
 builder.Services.AddScoped<DbContext, HostelDbContext>();
 builder.Services.AddScoped<IHostelService, HostelService>();

@@ -1,4 +1,4 @@
-﻿using AmdarisProject.Common.Dtos;
+﻿using AmdarisProject.Common.Dtos.Hostel;
 using Newtonsoft.Json;
 
 using var httpClient = new HttpClient();

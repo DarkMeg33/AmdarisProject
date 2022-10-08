@@ -1,4 +1,4 @@
-﻿namespace AmdarisProject.Common.Dtos
+﻿namespace AmdarisProject.Common.Dtos.Hostel
 {
     public class HostelDto
     {

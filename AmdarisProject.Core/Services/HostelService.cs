@@ -1,4 +1,4 @@
-﻿using AmdarisProject.Common.Dtos;
+﻿using AmdarisProject.Common.Dtos.Hostel;
 using AmdarisProject.Core.Interfaces;
 using AmdarisProject.DataAccess.Interfaces;
 using AmdarisProject.Domain;
@@ -26,22 +26,38 @@ namespace AmdarisProject.Core.Services
 
         public async Task<HostelDto> GetHostelByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var hostel = await _repository.GetByIdAsync(id);
+
+            return _mapper.Map<Hostel, HostelDto>(hostel);
         }
 
-        public async Task CreateHostelAsync(HostelDto hostel)
+        public async Task<HostelDto> CreateHostelAsync(HostelUpdateDto hostelUpdateDto)
         {
-            throw new NotImplementedException();
+            var hostel = _mapper.Map<Hostel>(hostelUpdateDto);
+
+            await _repository.CreateAsync(hostel);
+
+            return _mapper.Map<Hostel, HostelDto>(hostel);
         }
 
-        public async Task UpdateHostelAsync(HostelDto hostel)
+        public async Task<HostelDto> UpdateHostelAsync(int id, HostelUpdateDto hostelUpdateDto)
         {
-            throw new NotImplementedException();
+            var hostel = await _repository.GetByIdAsync(id);
+
+            if (hostel is null)
+            {
+                throw new ArgumentException(); //TODO Change
+            }
+
+            _mapper.Map(hostelUpdateDto, hostel);
+            await _repository.UpdateAsync(hostel);
+
+            return _mapper.Map<Hostel, HostelDto>(hostel);
         }
 
-        public async Task DeleteHostelAsync(HostelDto hostel)
+        public async Task DeleteHostelAsync(int id)
         {
-            throw new NotImplementedException();
+            await _repository.DeleteByIdAsync(id);
         }
     }
 }

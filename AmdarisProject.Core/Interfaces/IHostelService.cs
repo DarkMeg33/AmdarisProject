@@ -1,4 +1,4 @@
-﻿using AmdarisProject.Common.Dtos;
+﻿using AmdarisProject.Common.Dtos.Hostel;
 
 namespace AmdarisProject.Core.Interfaces
 {
@@ -6,8 +6,8 @@ namespace AmdarisProject.Core.Interfaces
     {
         Task<IList<HostelDto>> GetHostelsAsync();
         Task<HostelDto> GetHostelByIdAsync(int id);
-        Task CreateHostelAsync(HostelDto hostel);
-        Task UpdateHostelAsync(HostelDto hostel);
-        Task DeleteHostelAsync(HostelDto hostel);
+        Task<HostelDto> CreateHostelAsync(HostelUpdateDto hostelUpdateDto);
+        Task<HostelDto> UpdateHostelAsync(int id, HostelUpdateDto hostelUpdateDto);
+        Task DeleteHostelAsync(int id);
     }
 }
