@@ -1,17 +1,14 @@
+using AmdarisProject.Api.Infrastructure.Extensions;
 using AmdarisProject.Common.Attributes;
 using AmdarisProject.Core;
 using AmdarisProject.Core.Interfaces;
-using AmdarisProject.Core.Profiles;
 using AmdarisProject.Core.Services;
 using AmdarisProject.DataAccess.Contexts;
 using AmdarisProject.DataAccess.Interfaces;
 using AmdarisProject.DataAccess.Repositories;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.AddControllers(o => o.Filters.Add(typeof(ApiExceptionFilterAttribute)));
 builder.Services.AddEndpointsApiExplorer();
@@ -36,7 +33,9 @@ builder.Services.AddScoped<IHostelService, HostelService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseCustomExceptionHandling();
+app.UseExceptionLogger();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

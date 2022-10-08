@@ -18,9 +18,4 @@
     <ProjectReference Include="..\AmdarisProject.Core\AmdarisProject.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Infrastructure\Extensions\" />
-    <Folder Include="Infrastructure\Middlewares\" />
-  </ItemGroup>
-
 </Project>
