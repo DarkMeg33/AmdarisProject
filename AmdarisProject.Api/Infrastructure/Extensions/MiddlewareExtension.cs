@@ -13,5 +13,10 @@ namespace AmdarisProject.Api.Infrastructure.Extensions
         {
             return builder.UseMiddleware<ExceptionLoggerMiddleware>();
         }
+
+        public static IApplicationBuilder UseTransactions(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<TransactionMiddleware>();
+        }
     }
 }

@@ -26,6 +26,7 @@ builder.Services.AddDbContext<HostelDbContext>(options =>
 
 //builder.Services.AddSingleton(mapperConfiguration.CreateMapper());
 
+//What are the difference of 31 and 32 lines?
 builder.Services.AddAutoMapper(typeof(CoreAssemblyMarker));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EFCoreRepository<>));
 builder.Services.AddScoped<DbContext, HostelDbContext>();
@@ -45,6 +46,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseTransactions();
 
 app.MapControllers();
 
