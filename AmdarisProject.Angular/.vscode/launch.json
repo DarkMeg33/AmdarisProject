@@ -15,6 +15,14 @@
       "preLaunchTask": "npm: start",
       "url": "http://localhost:4200",
       "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "ng run build",
+      "type": "chrome",
+      "request": "launch",
+      "preLaunchTask": "npm: build",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}"
     }
   ]
 }
