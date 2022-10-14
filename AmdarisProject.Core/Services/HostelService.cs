@@ -52,7 +52,7 @@ namespace AmdarisProject.Core.Services
 
             if (hostel is null)
             {
-                throw new ArgumentException(); //TODO Change
+                throw new ArgumentException(); //TODO Change this exception
             }
 
             _mapper.Map(hostelUpdateDto, hostel);

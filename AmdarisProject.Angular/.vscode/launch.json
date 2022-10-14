@@ -9,9 +9,10 @@
       "webRoot": "${workspaceFolder}"
     },
     {
-      "type": "edge",
+      "name": "ng serve",
+      "type": "chrome",
       "request": "launch",
-      "name": "localhost (Edge)",
+      "preLaunchTask": "npm: start",
       "url": "http://localhost:4200",
       "webRoot": "${workspaceFolder}"
     }

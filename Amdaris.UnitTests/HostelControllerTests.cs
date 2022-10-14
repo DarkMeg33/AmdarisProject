@@ -1,4 +1,4 @@
-﻿using AmdarisProject.Api.Controllersа;
+﻿using AmdarisProject.Api.Controllers;
 using AmdarisProject.Common.Dtos.Hostel;
 using AmdarisProject.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;

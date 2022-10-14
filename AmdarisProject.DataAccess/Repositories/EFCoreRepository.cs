@@ -1,8 +1,7 @@
-﻿using System.Linq.Expressions;
-using System.Runtime.InteropServices;
-using AmdarisProject.DataAccess.Interfaces;
+﻿using AmdarisProject.DataAccess.Interfaces;
 using AmdarisProject.Domain;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace AmdarisProject.DataAccess.Repositories
 {
@@ -46,7 +45,7 @@ namespace AmdarisProject.DataAccess.Repositories
 
         public async Task DeleteByIdAsync(int id)
         {
-            T entity = await GetByIdAsync(id); 
+            T entity = await GetByIdAsync(id);
             _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
         }

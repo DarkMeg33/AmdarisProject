@@ -1,13 +1,13 @@
-﻿using AmdarisProject.Api.Controllers;
-using AmdarisProject.Common.Dtos.Hostel;
+﻿using AmdarisProject.Common.Dtos.Hostel;
 using AmdarisProject.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AmdarisProject.Api.Controllersа
+namespace AmdarisProject.Api.Controllers
 {
     [Route("api/hostels")]
     public class HostelsController : AppControllerBase
     {
+        //TODO Handle all ways, add new api exceptions
         private readonly IHostelService _hostelService;
 
         public HostelsController(IHostelService hostelService)
