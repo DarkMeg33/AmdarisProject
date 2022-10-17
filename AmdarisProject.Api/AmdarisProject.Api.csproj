@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AmdarisProject.Core\AmdarisProject.Core.csproj" />
+    <InternalsVisibleTo Include ="Amdaris.UnitTests"/>
   </ItemGroup>
 
 </Project>

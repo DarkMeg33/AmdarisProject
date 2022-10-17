@@ -19,14 +19,6 @@ builder.Services.AddDbContext<HostelDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
 });
 
-//var mapperConfiguration = new MapperConfiguration(options =>
-//{
-//    //options.AddProfile<HostelProfile>();
-//});
-
-//builder.Services.AddSingleton(mapperConfiguration.CreateMapper());
-
-//What are the difference of 31 and 32 lines?
 builder.Services.AddAutoMapper(typeof(CoreAssemblyMarker));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EFCoreRepository<>));
 builder.Services.AddScoped<DbContext, HostelDbContext>();
