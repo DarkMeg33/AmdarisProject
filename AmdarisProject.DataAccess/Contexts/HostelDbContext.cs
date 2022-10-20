@@ -17,6 +17,8 @@ namespace AmdarisProject.DataAccess.Contexts
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new HostelConfiguration());
+
+            //TODO Create entities configurations
         }
     }
 }

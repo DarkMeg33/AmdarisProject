@@ -1,6 +1,7 @@
 ﻿using AmdarisProject.Common.Dtos.Hostel;
 using AmdarisProject.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 namespace AmdarisProject.Api.Controllers
 {
@@ -41,7 +42,7 @@ namespace AmdarisProject.Api.Controllers
 
             var hostel = await _hostelService.CreateHostelAsync(hostelUpdateDto);
 
-            return CreatedAtAction(nameof(GetHostel), new { id = hostel.HostelNumber }, hostel);
+            return CreatedAtAction(nameof(GetHostel), new { id = hostel.Id }, hostel);
         }
 
         [HttpPut("{id}")]
@@ -52,12 +53,7 @@ namespace AmdarisProject.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var hostelDto = await _hostelService.UpdateHostelAsync(id, hostelUpdateDto);
-
-            if (hostelDto is null)
-            {
-                return Conflict();
-            }
+            await _hostelService.UpdateHostelAsync(id, hostelUpdateDto);
 
             return NoContent();
         }
