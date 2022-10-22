@@ -4,7 +4,6 @@ using AmdarisProject.Core.Interfaces;
 using AmdarisProject.DataAccess.Interfaces;
 using AmdarisProject.Domain;
 using AutoMapper;
-using System.Reflection.Metadata.Ecma335;
 
 namespace AmdarisProject.Core.Services
 {

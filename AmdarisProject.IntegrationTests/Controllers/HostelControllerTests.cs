@@ -55,9 +55,10 @@ namespace AmdarisProject.IntegrationTests.Controllers
         [Test]
         public async Task GetHostels_ShouldReturnsListOfHostelsDtos()
         {
-            //Act
+            //Arrange
             _hostelService.Setup(s => s.GetHostelsAsync()).ReturnsAsync(GetHostelDtos());
 
+            //Act
             var response = await _httpClient.GetAsync($"api/hostels");
             response.EnsureSuccessStatusCode();
 
