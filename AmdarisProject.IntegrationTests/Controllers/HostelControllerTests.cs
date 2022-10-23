@@ -13,8 +13,8 @@ namespace AmdarisProject.IntegrationTests.Controllers
     internal class HostelControllerTests
     {
         private Mock<IHostelService> _hostelService;
-
         private HttpClient _httpClient;
+        private WebApplicationFactory<Program> _server;
 
         [SetUp]
         public void SetUp()
@@ -22,7 +22,7 @@ namespace AmdarisProject.IntegrationTests.Controllers
             //Arrange
             _hostelService = new Mock<IHostelService>();
 
-            var server = new WebApplicationFactory<Program>()
+            _server = new WebApplicationFactory<Program>()
                 .WithWebHostBuilder(builder =>
                 {
                     builder.ConfigureServices(s =>
@@ -31,13 +31,14 @@ namespace AmdarisProject.IntegrationTests.Controllers
                     });
                 });
 
-            _httpClient = server.CreateClient();
+            _httpClient = _server.CreateClient();
         }
 
         [TearDown]
         public void TearDown()
         {
             _httpClient.Dispose();
+            _server.Dispose();
         }
 
         public List<HostelDto> GetHostelDtos()

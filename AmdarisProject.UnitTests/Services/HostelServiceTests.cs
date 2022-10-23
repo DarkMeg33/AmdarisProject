@@ -55,5 +55,24 @@ namespace AmdarisProject.UnitTests.Services
 
             Assert.That(sortedHostels.Count, Is.EqualTo(_hostels.Count));
         }
+
+        [Test]
+        public async Task GetHostelByIdAsync_ShouldReturnHostelDto()
+        {
+            //Arrange
+            var id = 5;
+
+            _repo
+                .Setup(r => r.GetByIdAsync(id))
+                .ReturnsAsync(_hostels.FirstOrDefault(x => x.Id == id));
+
+            //Act
+            var hostel = await _hostelService.GetHostelByIdAsync(id);
+
+            //Assert
+            Assert.IsNotNull(hostel);
+            Assert.That(hostel.Id, Is.EqualTo(id));
+            Assert.That(hostel.HostelNumber, Is.EqualTo(_hostels.FirstOrDefault(x => x.Id == id)?.HostelNumber));
+        }
     }
 }
