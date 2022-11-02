@@ -8,7 +8,7 @@ namespace AmdarisProject.DataAccess.Contexts
     {
         public HostelDbContext(DbContextOptions<HostelDbContext> options) : base(options)
         {
-            
+            Database.EnsureCreated();
         }
 
         public DbSet<Hostel> Hostels { get; set; }
