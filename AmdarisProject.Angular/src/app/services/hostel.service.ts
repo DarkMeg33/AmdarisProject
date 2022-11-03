@@ -15,4 +15,20 @@ export class HostelService {
   public getHostels(): Observable<Hostel[]> {
     return this.httpClient.get<Hostel[]>("/api/hostels");
   }
+
+  public getHostel(id: number): Observable<Hostel> {
+    return this.httpClient.get<Hostel>(`/api/hostel/${id}`);
+  }
+
+  public createHostel(hostel: Hostel): Observable<Hostel> {
+    return this.httpClient.post<Hostel>("/api/hostels", hostel);
+  }
+
+  public updateHostel(hostel: Hostel): Observable<Hostel> {
+    return this.httpClient.put<Hostel>(`/api/hostels/${hostel.id}`, hostel);
+  }
+
+  public deleteHostel(id: number) {
+    return this.httpClient.delete(`/api/hostel/${id}`);
+  }
 }
