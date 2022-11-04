@@ -1,10 +1,55 @@
 <p>home-page works!</p>
 
 <div>
-    <table>
+    <table *ngIf="hostels">
         <tr *ngFor="let hostel of hostels">
             <td>Hostel id: {{ hostel.id }}</td>
             <td>Hostel number: {{ hostel.hostelNumber }}</td>
         </tr>
     </table>
 </div>
+
+<button type="sybmit" (click)="Get()">Get!</button>
+
+<form #form='ngForm' (ngSubmit)="GetById()">
+    <div>
+        <label for="id">Id</label>
+        <input type="text" name="id" [(ngModel)] = "id">
+    </div>
+    <button type="sybmit" [disabled]="!form.valid">Get!</button>
+</form>
+
+<div *ngIf="hostel">
+    <ul>
+        <li>Hostel id: {{ hostel.id }}</li>
+        <li>Hostel number: {{ hostel.hostelNumber }}</li>
+    </ul>
+</div>
+
+<form (ngSubmit)="post()" #form="ngForm">
+    <div>
+        <label for="">HostelNumber</label>
+        <input type="text" name="id" [(ngModel)] = "hostelNumber">
+    </div>
+    <button type="sybmit" [disabled]="!form.valid">Post!</button>
+</form>
+
+<form (ngSubmit)="put()" #form="ngForm">
+    <div>
+        <label for="">Id</label>
+        <input type="text" name="id" [(ngModel)] = "updateHostelDto.id">
+    </div>
+    <div>
+        <label for="">HostelNumber</label>
+        <input type="text" name="id" [(ngModel)] = "updateHostelDto.hostelNumber">
+    </div>
+    <button type="sybmit" [disabled]="!form.valid">Put!</button>
+</form>
+
+<form (ngSubmit)="delete1()" #form="ngForm">
+    <div>
+        <label for="">Id</label>
+        <input type="text" name="id" [(ngModel)] = "id">
+    </div>
+    <button type="sybmit" [disabled]="!form.valid">Delete!</button>
+</form>

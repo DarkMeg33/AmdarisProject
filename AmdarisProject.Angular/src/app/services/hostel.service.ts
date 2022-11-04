@@ -17,7 +17,7 @@ export class HostelService {
   }
 
   public getHostel(id: number): Observable<Hostel> {
-    return this.httpClient.get<Hostel>(`/api/hostel/${id}`);
+    return this.httpClient.get<Hostel>(`/api/hostels/${id}`);
   }
 
   public createHostel(hostel: Hostel): Observable<Hostel> {
@@ -29,6 +29,6 @@ export class HostelService {
   }
 
   public deleteHostel(id: number) {
-    return this.httpClient.delete(`/api/hostel/${id}`);
+    return this.httpClient.delete(`/api/hostels/${id}`);
   }
 }

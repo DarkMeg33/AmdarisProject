@@ -9,13 +9,43 @@ import { Hostel } from 'src/app/models/hostel/hostel';
 })
 export class HomePageComponent implements OnInit {
 
-  public hostels: Hostel[] = [];
+  public hostels: Hostel[] | undefined;
+  public hostel: Hostel | undefined;
+  public id: number = -1;
+  public hostelNumber: number = 0;
+
+  public updateHostelDto: Hostel = {id: 0, hostelNumber: 0};
 
   constructor(private hostelService: HostelService) { }
 
   ngOnInit(): void {
+    
+  }
+
+  public GetById() {
+    this.hostelService.getHostel(this.id).subscribe((h) => {
+      this.hostel = h;
+    });
+  }
+
+  public Get() {
     this.hostelService.getHostels().subscribe((h) => {
       this.hostels = h;
     });
+  }
+
+  public post() {
+    this.hostelService.createHostel({
+      id: 0,
+      hostelNumber: this.hostelNumber
+    }).subscribe();
+  }
+
+  public put() {
+    this.hostelService.updateHostel(this.updateHostelDto).subscribe();
+  }
+
+  public delete1() {
+    this.hostelService.deleteHostel(this.id).subscribe();
   }
 }
