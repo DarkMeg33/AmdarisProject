@@ -68,10 +68,6 @@ namespace AmdarisProject.Core.Services
             if (hostel is null) throw new NotFoundException("Hostel isn't exists.");
 
             await _repository.DeleteByIdAsync(id);
-
-            hostel = await _repository.GetByIdAsync(id);
-
-            if (hostel is not null) throw new ServiceUnaviableException("Service isn't aviable");
         }
     }
 }

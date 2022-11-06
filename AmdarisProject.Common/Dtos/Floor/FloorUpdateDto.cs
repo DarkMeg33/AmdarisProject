@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using AmdarisProject.Common.Dtos.Hostel;
 
 namespace AmdarisProject.Common.Dtos.Floor
 {
@@ -9,5 +10,6 @@ namespace AmdarisProject.Common.Dtos.Floor
 
         public bool HasKitchen { get; set; }
         public bool HasWashMachine { get; set; }
+        public int HostelId { get; set; }
     }
 }

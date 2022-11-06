@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmdarisProject.DataAccess.Migrations
 {
     [DbContext(typeof(HostelDbContext))]
-    [Migration("20221106155634__addFloorCrud")]
-    partial class _addFloorCrud
+    [Migration("20221106175625__changeNodeOnSection")]
+    partial class _changeNodeOnSection
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,7 +67,43 @@ namespace AmdarisProject.DataAccess.Migrations
                     b.ToTable("Hostels");
                 });
 
-            modelBuilder.Entity("AmdarisProject.Domain.Node", b =>
+            modelBuilder.Entity("AmdarisProject.Domain.Room", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("BedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BedsideTableCount")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("HasCupboard")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRepaired")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RoomNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SectionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TableCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SectionId");
+
+                    b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("AmdarisProject.Domain.Section", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -91,43 +127,7 @@ namespace AmdarisProject.DataAccess.Migrations
 
                     b.HasIndex("FloorId");
 
-                    b.ToTable("Node");
-                });
-
-            modelBuilder.Entity("AmdarisProject.Domain.Room", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("BedCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BedsideTableCount")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("HasCupboard")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsRepaired")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("NodeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoomNumber")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TableCount")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NodeId");
-
-                    b.ToTable("Room");
+                    b.ToTable("Sections");
                 });
 
             modelBuilder.Entity("AmdarisProject.Domain.User", b =>
@@ -145,7 +145,7 @@ namespace AmdarisProject.DataAccess.Migrations
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("AmdarisProject.Domain.Floor", b =>
@@ -159,22 +159,26 @@ namespace AmdarisProject.DataAccess.Migrations
                     b.Navigation("Hostel");
                 });
 
-            modelBuilder.Entity("AmdarisProject.Domain.Node", b =>
+            modelBuilder.Entity("AmdarisProject.Domain.Room", b =>
+                {
+                    b.HasOne("AmdarisProject.Domain.Section", "Section")
+                        .WithMany("Rooms")
+                        .HasForeignKey("SectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Section");
+                });
+
+            modelBuilder.Entity("AmdarisProject.Domain.Section", b =>
                 {
                     b.HasOne("AmdarisProject.Domain.Floor", "Floor")
-                        .WithMany("Nodes")
+                        .WithMany("Sections")
                         .HasForeignKey("FloorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Floor");
-                });
-
-            modelBuilder.Entity("AmdarisProject.Domain.Room", b =>
-                {
-                    b.HasOne("AmdarisProject.Domain.Node", null)
-                        .WithMany("Rooms")
-                        .HasForeignKey("NodeId");
                 });
 
             modelBuilder.Entity("AmdarisProject.Domain.User", b =>
@@ -186,7 +190,7 @@ namespace AmdarisProject.DataAccess.Migrations
 
             modelBuilder.Entity("AmdarisProject.Domain.Floor", b =>
                 {
-                    b.Navigation("Nodes");
+                    b.Navigation("Sections");
                 });
 
             modelBuilder.Entity("AmdarisProject.Domain.Hostel", b =>
@@ -194,14 +198,14 @@ namespace AmdarisProject.DataAccess.Migrations
                     b.Navigation("Floors");
                 });
 
-            modelBuilder.Entity("AmdarisProject.Domain.Node", b =>
-                {
-                    b.Navigation("Rooms");
-                });
-
             modelBuilder.Entity("AmdarisProject.Domain.Room", b =>
                 {
                     b.Navigation("Tenants");
+                });
+
+            modelBuilder.Entity("AmdarisProject.Domain.Section", b =>
+                {
+                    b.Navigation("Rooms");
                 });
 #pragma warning restore 612, 618
         }

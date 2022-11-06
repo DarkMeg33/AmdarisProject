@@ -1,8 +1,8 @@
 ﻿namespace AmdarisProject.Domain
 {
-    public class Node : BaseEntity
+    public class Section : BaseEntity
     {
-        public int NodeNumber { get; set; }
+        public int SectionNumber { get; set; }
 
         public bool HasShower { get; set; }
         public bool HasToiler { get; set; }

@@ -1,4 +1,6 @@
-﻿namespace AmdarisProject.Common.Dtos.Floor
+﻿using AmdarisProject.Common.Dtos.Hostel;
+
+namespace AmdarisProject.Common.Dtos.Floor
 {
     public class FloorDto
     {
@@ -7,5 +9,6 @@
 
         public bool HasKitchen { get; set; }
         public bool HasWashMachine { get; set; }
+        public int HostelId { get; set; }
     }
 }

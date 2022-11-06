@@ -68,10 +68,6 @@ namespace AmdarisProject.Core.Services
             if (floor is null) throw new NotFoundException("Floor isn't exists.");
 
             await _repository.DeleteByIdAsync(id);
-
-            floor = await _repository.GetByIdAsync(id);
-
-            if (floor is not null) throw new ServiceUnaviableException("Service isn't aviable");
         }
     }
 }

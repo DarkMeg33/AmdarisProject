@@ -9,7 +9,7 @@ namespace AmdarisProject.DataAccess.EntitiesConfigurations
         public void Configure(EntityTypeBuilder<Floor> builder)
         {
             builder
-                .HasMany(x => x.Nodes)
+                .HasMany(x => x.Sections)
                 .WithOne(x => x.Floor)
                 .HasForeignKey(fk => fk.FloorId);
         }

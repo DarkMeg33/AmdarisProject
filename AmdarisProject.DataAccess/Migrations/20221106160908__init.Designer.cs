@@ -4,6 +4,7 @@ using AmdarisProject.DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmdarisProject.DataAccess.Migrations
 {
     [DbContext(typeof(HostelDbContext))]
-    partial class HostelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221106160908__init")]
+    partial class _init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,6 +67,33 @@ namespace AmdarisProject.DataAccess.Migrations
                     b.ToTable("Hostels");
                 });
 
+            modelBuilder.Entity("AmdarisProject.Domain.Node", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("FloorId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("HasShower")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasToiler")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("NodeNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FloorId");
+
+                    b.ToTable("Nodes");
+                });
+
             modelBuilder.Entity("AmdarisProject.Domain.Room", b =>
                 {
                     b.Property<int>("Id")
@@ -85,10 +114,10 @@ namespace AmdarisProject.DataAccess.Migrations
                     b.Property<bool>("IsRepaired")
                         .HasColumnType("bit");
 
-                    b.Property<int>("RoomNumber")
+                    b.Property<int?>("NodeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SectionId")
+                    b.Property<int>("RoomNumber")
                         .HasColumnType("int");
 
                     b.Property<int>("TableCount")
@@ -96,36 +125,9 @@ namespace AmdarisProject.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SectionId");
+                    b.HasIndex("NodeId");
 
                     b.ToTable("Rooms");
-                });
-
-            modelBuilder.Entity("AmdarisProject.Domain.Section", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("FloorId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("HasShower")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasToiler")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("SectionNumber")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FloorId");
-
-                    b.ToTable("Sections");
                 });
 
             modelBuilder.Entity("AmdarisProject.Domain.User", b =>
@@ -157,26 +159,22 @@ namespace AmdarisProject.DataAccess.Migrations
                     b.Navigation("Hostel");
                 });
 
-            modelBuilder.Entity("AmdarisProject.Domain.Room", b =>
-                {
-                    b.HasOne("AmdarisProject.Domain.Section", "Section")
-                        .WithMany("Rooms")
-                        .HasForeignKey("SectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Section");
-                });
-
-            modelBuilder.Entity("AmdarisProject.Domain.Section", b =>
+            modelBuilder.Entity("AmdarisProject.Domain.Node", b =>
                 {
                     b.HasOne("AmdarisProject.Domain.Floor", "Floor")
-                        .WithMany("Sections")
+                        .WithMany("Nodes")
                         .HasForeignKey("FloorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Floor");
+                });
+
+            modelBuilder.Entity("AmdarisProject.Domain.Room", b =>
+                {
+                    b.HasOne("AmdarisProject.Domain.Node", null)
+                        .WithMany("Rooms")
+                        .HasForeignKey("NodeId");
                 });
 
             modelBuilder.Entity("AmdarisProject.Domain.User", b =>
@@ -188,7 +186,7 @@ namespace AmdarisProject.DataAccess.Migrations
 
             modelBuilder.Entity("AmdarisProject.Domain.Floor", b =>
                 {
-                    b.Navigation("Sections");
+                    b.Navigation("Nodes");
                 });
 
             modelBuilder.Entity("AmdarisProject.Domain.Hostel", b =>
@@ -196,14 +194,14 @@ namespace AmdarisProject.DataAccess.Migrations
                     b.Navigation("Floors");
                 });
 
+            modelBuilder.Entity("AmdarisProject.Domain.Node", b =>
+                {
+                    b.Navigation("Rooms");
+                });
+
             modelBuilder.Entity("AmdarisProject.Domain.Room", b =>
                 {
                     b.Navigation("Tenants");
-                });
-
-            modelBuilder.Entity("AmdarisProject.Domain.Section", b =>
-                {
-                    b.Navigation("Rooms");
                 });
 #pragma warning restore 612, 618
         }

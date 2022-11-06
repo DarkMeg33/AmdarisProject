@@ -10,6 +10,6 @@
         public int HostelId { get; set; }
         public Hostel Hostel { get; set; }
 
-        public IList<Node> Nodes { get; set; }
+        public IList<Section> Sections { get; set; }
     }
 }

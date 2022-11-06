@@ -4,7 +4,7 @@
 
 namespace AmdarisProject.DataAccess.Migrations
 {
-    public partial class _initial : Migration
+    public partial class _init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,7 +22,7 @@ namespace AmdarisProject.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Floor",
+                name: "Floors",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -34,9 +34,9 @@ namespace AmdarisProject.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Floor", x => x.Id);
+                    table.PrimaryKey("PK_Floors", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Floor_Hostels_HostelId",
+                        name: "FK_Floors_Hostels_HostelId",
                         column: x => x.HostelId,
                         principalTable: "Hostels",
                         principalColumn: "Id",
@@ -44,7 +44,7 @@ namespace AmdarisProject.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Node",
+                name: "Nodes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -56,17 +56,17 @@ namespace AmdarisProject.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Node", x => x.Id);
+                    table.PrimaryKey("PK_Nodes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Node_Floor_FloorId",
+                        name: "FK_Nodes_Floors_FloorId",
                         column: x => x.FloorId,
-                        principalTable: "Floor",
+                        principalTable: "Floors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Room",
+                name: "Rooms",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -81,16 +81,16 @@ namespace AmdarisProject.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Room", x => x.Id);
+                    table.PrimaryKey("PK_Rooms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Room_Node_NodeId",
+                        name: "FK_Rooms_Nodes_NodeId",
                         column: x => x.NodeId,
-                        principalTable: "Node",
+                        principalTable: "Nodes",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -99,48 +99,48 @@ namespace AmdarisProject.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_User_Room_RoomId",
+                        name: "FK_Users_Rooms_RoomId",
                         column: x => x.RoomId,
-                        principalTable: "Room",
+                        principalTable: "Rooms",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Floor_HostelId",
-                table: "Floor",
+                name: "IX_Floors_HostelId",
+                table: "Floors",
                 column: "HostelId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Node_FloorId",
-                table: "Node",
+                name: "IX_Nodes_FloorId",
+                table: "Nodes",
                 column: "FloorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Room_NodeId",
-                table: "Room",
+                name: "IX_Rooms_NodeId",
+                table: "Rooms",
                 column: "NodeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_RoomId",
-                table: "User",
+                name: "IX_Users_RoomId",
+                table: "Users",
                 column: "RoomId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Room");
+                name: "Rooms");
 
             migrationBuilder.DropTable(
-                name: "Node");
+                name: "Nodes");
 
             migrationBuilder.DropTable(
-                name: "Floor");
+                name: "Floors");
 
             migrationBuilder.DropTable(
                 name: "Hostels");
