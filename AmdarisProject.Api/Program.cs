@@ -23,6 +23,7 @@ builder.Services.AddAutoMapper(typeof(CoreAssemblyMarker));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EFCoreRepository<>));
 builder.Services.AddScoped<DbContext, HostelDbContext>();
 builder.Services.AddScoped<IHostelService, HostelService>();
+builder.Services.AddScoped<IFloorService, FloorService>();
 
 var app = builder.Build();
 
