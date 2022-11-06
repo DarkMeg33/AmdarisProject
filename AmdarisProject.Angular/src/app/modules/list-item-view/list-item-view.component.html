@@ -1,0 +1,11 @@
+<div>
+    <mat-list-item>
+        <button mat-icon-button [disabled]="!canExpand" (click)="expand()">
+            <mat-icon>{{ isExpanded ? 'expand_more' : 'chevron_right' }}</mat-icon>
+        </button>
+        {{title}}
+    </mat-list-item>
+    <div style="margin-left:30px;" *ngIf="isExpanded">
+       <ng-content></ng-content>
+    </div>
+</div>

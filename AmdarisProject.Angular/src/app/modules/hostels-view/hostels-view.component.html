@@ -1,0 +1,27 @@
+<!-- <div class="hostels-container">
+    <mat-list>
+        <div *ngFor="let hostel of data">
+            <mat-list-item>
+                <button mat-icon-button [disabled]="!canExpand(hostel)" (click)="open()">
+                    <mat-icon>{{ isOpened ? 'expand_more' : 'chevron_right' }}</mat-icon>
+                </button>
+                Hostel number: {{hostel.id}}
+            </mat-list-item>
+            <div style="margin-left:30px;" *ngIf="isOpened">
+                <app-floors-view [hostel]="hostel"></app-floors-view>
+            </div>
+            <mat-divider *ngIf="!(data[data.length - 1] === hostel)"></mat-divider>
+        </div>
+    </mat-list>
+</div> -->
+
+<div class="hostels-container">
+    <mat-list>
+        <div *ngFor="let hostel of data">
+            <app-list-item-view [title]="hostel.hostelNumber.toString()" [canExpand]="hostel.floors !== undefined">
+                <app-floors-view [hostel]="hostel"></app-floors-view>
+            </app-list-item-view>
+            <mat-divider *ngIf="data.at(-1) !== hostel"></mat-divider>
+        </div>
+    </mat-list>
+</div>

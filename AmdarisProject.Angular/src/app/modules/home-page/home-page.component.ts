@@ -1,6 +1,7 @@
+import { Hostel } from './../../models/hostel/hostel';
 import { HostelService } from './../../services/hostel.service';
 import { Component, OnInit } from '@angular/core';
-import { Hostel } from 'src/app/models/hostel/hostel';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
@@ -10,42 +11,52 @@ import { Hostel } from 'src/app/models/hostel/hostel';
 export class HomePageComponent implements OnInit {
 
   public hostels: Hostel[] | undefined;
-  public hostel: Hostel | undefined;
-  public id: number = -1;
-  public hostelNumber: number = 0;
-
-  public updateHostelDto: Hostel = {id: 0, hostelNumber: 0};
 
   constructor(private hostelService: HostelService) { }
 
-  ngOnInit(): void {
-    
+  public ngOnInit(): void {
+    this.SetHostels();
   }
 
-  public GetById() {
-    this.hostelService.getHostel(this.id).subscribe((h) => {
-      this.hostel = h;
+  public SetHostels() {
+    this.hostelService.getHostels().subscribe({
+      next: (hostels) => {
+        this.hostels = hostels;
+      }
     });
   }
 
-  public Get() {
-    this.hostelService.getHostels().subscribe((h) => {
-      this.hostels = h;
-    });
-  }
+  // public hostels: Hostel[] | undefined;
+  // public hostel: Hostel | undefined;
+  // public id: number = -1;
+  // public hostelNumber: number = 0;
 
-  public post() {
-    this.hostelService.createHostel({
-      id: 0,
-      hostelNumber: this.hostelNumber
-    }).subscribe();
-  }
+  // public updateHostelDto: Hostel = {id: 0, hostelNumber: 0};
 
-  public put() {
-    this.hostelService.updateHostel(this.updateHostelDto).subscribe();
-  }
+  // public GetById() {
+  //   this.hostelService.getHostel(this.id).subscribe((h) => {
+  //     this.hostel = h;
+  //   });
+  // }
 
-  public delete1() {
-    this.hostelService.deleteHostel(this.id).subscribe();
-  }
+  // public Get() {
+  //   this.hostelService.getHostels().subscribe((h) => {
+  //     this.hostels = h;
+  //   });
+  // }
+
+  // public post() {
+  //   this.hostelService.createHostel({
+  //     id: 0,
+  //     hostelNumber: this.hostelNumber
+  //   }).subscribe();
+  // }
+
+  // public put() {
+  //   this.hostelService.updateHostel(this.updateHostelDto).subscribe();
+  // }
+
+  // public delete1() {
+  //   this.hostelService.deleteHostel(this.id).subscribe();
+  // }
 }

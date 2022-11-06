@@ -1,0 +1,14 @@
+.container {
+    height: 91%;
+}
+
+.content {
+    background-color: white;
+    padding: 10px 10px 10px 10px;
+}
+
+.sidebar {
+    width: 30%;
+    background-color: whitesmoke;
+    padding: 10px 10px 10px 10px;
+}
