@@ -25,6 +25,7 @@ builder.Services.AddScoped<DbContext, HostelDbContext>();
 builder.Services.AddScoped<IHostelService, HostelService>();
 builder.Services.AddScoped<IFloorService, FloorService>();
 builder.Services.AddScoped<ISectionService, SectionService>();
+builder.Services.AddScoped<IRoomService, RoomService>();
 
 var app = builder.Build();
 

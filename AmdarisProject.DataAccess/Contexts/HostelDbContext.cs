@@ -25,6 +25,7 @@ namespace AmdarisProject.DataAccess.Contexts
             modelBuilder.ApplyConfiguration(new HostelConfiguration());
             modelBuilder.ApplyConfiguration(new FloorConfiguration());
             modelBuilder.ApplyConfiguration(new SectionConfiguration());
+            modelBuilder.ApplyConfiguration(new RoomConfiguration());
 
             //TODO Create entities configurations
         }
