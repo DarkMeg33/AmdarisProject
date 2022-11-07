@@ -9,7 +9,9 @@ namespace AmdarisProject.DataAccess.EntitiesConfigurations
         public void Configure(EntityTypeBuilder<Room> builder)
         {
             builder
-                .HasMany(x => x.Tenants);
+                .HasMany(x => x.Tenants)
+                .WithOne(x => x.Room)
+                .HasForeignKey(fk => fk.RoomId);
         }
     }
 }

@@ -19,6 +19,10 @@ builder.Services.AddDbContext<HostelDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
 });
 
+var jwtAuthOptions = builder.Configuration.ConfigureJwtAuthOptions(builder.Services);
+
+builder.Services.AddJwtAuth(jwtAuthOptions);
+
 builder.Services.AddAutoMapper(typeof(CoreAssemblyMarker));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EFCoreRepository<>));
 builder.Services.AddScoped<DbContext, HostelDbContext>();
@@ -27,6 +31,7 @@ builder.Services.AddScoped<IFloorService, FloorService>();
 builder.Services.AddScoped<ISectionService, SectionService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IHostelRepository, HostelRepository>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 var app = builder.Build();
 
@@ -40,6 +45,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
