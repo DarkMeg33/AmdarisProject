@@ -13,7 +13,7 @@ namespace AmdarisProject.UnitTests.Services
     {
         private IMapper _mapper;
         private List<Hostel> _hostels;
-        private Mock<IRepository<Hostel>> _repo;
+        private Mock<IHostelRepository> _repo;
         private IHostelService _hostelService;
 
         [SetUp]
@@ -32,7 +32,7 @@ namespace AmdarisProject.UnitTests.Services
             _mapper = new Mapper(new MapperConfiguration(cfg 
                 => cfg.CreateMap<Hostel, HostelDto>()));
 
-            _repo = new Mock<IRepository<Hostel>>();
+            _repo = new Mock<IHostelRepository>();
             _hostelService = new HostelService(_repo.Object, _mapper);
         }
 

@@ -8,7 +8,7 @@ namespace AmdarisProject.DataAccess.Repositories
     public class EFCoreRepository<T> : IRepository<T>, IDisposable where T : BaseEntity
     {
         private readonly DbContext _context;
-        private readonly DbSet<T> _dbSet;
+        protected readonly DbSet<T> _dbSet;
 
         public EFCoreRepository(DbContext context)
         {
@@ -29,6 +29,19 @@ namespace AmdarisProject.DataAccess.Repositories
         public async Task<IList<T>> GetByQueryAsync(Expression<Func<T, bool>> predicate)
         {
             return await _dbSet.Where(predicate).ToListAsync();
+        }
+
+        public async Task<T> GetByIdWithInclude(int id, params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> entities = _dbSet;
+
+            foreach (var includeProperty in includeProperties)
+            {
+                entities = entities.Include(includeProperty);
+            }
+
+            var query = entities;
+            return await query.FirstOrDefaultAsync(entity => entity.Id == id);
         }
 
         public async Task CreateAsync(T entity)

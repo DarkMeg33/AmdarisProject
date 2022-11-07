@@ -1,4 +1,6 @@
-﻿namespace AmdarisProject.Common.Dtos.Section
+﻿using AmdarisProject.Common.Dtos.Room;
+
+namespace AmdarisProject.Common.Dtos.Section
 {
     public class SectionDto
     {
@@ -9,5 +11,6 @@
         public bool HasToiler { get; set; }
 
         public int FloorId { get; set; }
+        public IList<RoomDto> Rooms { get; set; }
     }
 }
