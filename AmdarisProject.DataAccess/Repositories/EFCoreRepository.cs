@@ -31,7 +31,7 @@ namespace AmdarisProject.DataAccess.Repositories
             return await _dbSet.Where(predicate).ToListAsync();
         }
 
-        public async Task<T> GetByIdWithInclude(int id, params Expression<Func<T, object>>[] includeProperties)
+        public async Task<T> GetByIdWithIncludeAsync(int id, params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> entities = _dbSet;
 

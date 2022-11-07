@@ -8,7 +8,7 @@ namespace AmdarisProject.DataAccess.Interfaces
         Task<T> GetByIdAsync(int id);
         Task<IList<T>> GetAllAsync();
         Task<IList<T>> GetByQueryAsync(Expression<Func<T, bool>> predicate);
-        Task<T> GetByIdWithInclude(int id, params Expression<Func<T, object>>[] includeProperties);
+        Task<T> GetByIdWithIncludeAsync(int id, params Expression<Func<T, object>>[] includeProperties);
         Task CreateAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteByIdAsync(int id);

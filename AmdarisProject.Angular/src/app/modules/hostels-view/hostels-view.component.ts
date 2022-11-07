@@ -1,9 +1,9 @@
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit } from '@angular/core';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { HostelTemp } from 'src/app/models/hostel/hostelTemp';
+import { Hostel } from 'src/app/models/hostel/hostel';
 
-const _DATA: HostelTemp[] = [
+const _DATA: Hostel[] = [
   {
     id: 1,
     hostelNumber: 1,
@@ -27,7 +27,7 @@ const _DATA: HostelTemp[] = [
 })
 export class HostelsViewComponent implements OnInit {
 
-  public data: HostelTemp[];
+  public data: Hostel[];
 
   public isExpandable: boolean = false;
   public isOpened: boolean = false;
@@ -39,7 +39,7 @@ export class HostelsViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public canExpand(hostel: HostelTemp): boolean {
+  public canExpand(hostel: Hostel): boolean {
     this.isExpandable = hostel.floors ? true: false
     return this.isExpandable;
   }
