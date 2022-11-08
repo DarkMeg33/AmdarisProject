@@ -8,13 +8,14 @@ using Microsoft.Extensions.Options;
 
 namespace AmdarisProject.Api.Controllers
 {
+    [Authorize]
     [Route("api/account")]
     public class AccountController : AppControllerBase
     {
         private readonly JwtAuthOptions _jwtAuthOptions;
         private readonly IAccountService _accountService;
 
-        public AccountController(IOptions<JwtAuthOptions> jwtAuthOptions, AccountService accountService)
+        public AccountController(IOptions<JwtAuthOptions> jwtAuthOptions, IAccountService accountService)
         {
             _accountService = accountService;
             _jwtAuthOptions = jwtAuthOptions.Value;
@@ -24,9 +25,19 @@ namespace AmdarisProject.Api.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userLoginDto)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var authOptions = (_jwtAuthOptions.Token, _jwtAuthOptions.Audience, _jwtAuthOptions.Issuer);
+
+            var jwtToken = await _accountService.LoginUserAsync(userLoginDto, authOptions);
+
+            return Ok(jwtToken);
         }
-        
+
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterDto userRegisterDto)
         {

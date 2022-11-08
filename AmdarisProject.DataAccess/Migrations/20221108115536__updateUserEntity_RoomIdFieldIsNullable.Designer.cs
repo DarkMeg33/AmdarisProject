@@ -4,6 +4,7 @@ using AmdarisProject.DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmdarisProject.DataAccess.Migrations
 {
     [DbContext(typeof(HostelDbContext))]
-    partial class HostelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221108115536__updateUserEntity_RoomIdFieldIsNullable")]
+    partial class _updateUserEntity_RoomIdFieldIsNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

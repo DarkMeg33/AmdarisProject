@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers(o => o.Filters.Add(typeof(ApiExceptionFilterAttribute)));
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwagger();
 
 builder.Services.AddDbContext<HostelDbContext>(options =>
 {
