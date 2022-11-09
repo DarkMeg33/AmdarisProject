@@ -9,8 +9,8 @@ namespace AmdarisProject.DataAccess.Contexts
     {
         public HostelDbContext(DbContextOptions<HostelDbContext> options) : base(options)
         {
-            //Database.Migrate();
-            //Database.EnsureCreated();
+            Database.Migrate();
+            Database.EnsureCreated();
         }
 
         public DbSet<Hostel> Hostels { get; set; }

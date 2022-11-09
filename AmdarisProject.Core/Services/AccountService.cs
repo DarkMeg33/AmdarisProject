@@ -1,7 +1,9 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using AmdarisProject.Common.Dtos.User;
+using AmdarisProject.Common.Exeptions;
 using AmdarisProject.Core.Infrastructure;
 using AmdarisProject.Core.Interfaces;
 using AmdarisProject.DataAccess.Interfaces;
@@ -31,11 +33,12 @@ namespace AmdarisProject.Core.Services
 
             if (alreadyExists.Any())
             {
-                throw new Exception(); //TODO Create new exception
+                throw new ConflictException("User with this credentials exists"); //TODO Create new exception
             }
 
-            //user.Password = Cryptography.HashString(user.Password);
-            //TODO Configure hash method
+            var hash = Cryptography.HashString(user.Password);
+            user.Password = hash.hashed;
+            user.PasswordSalt = hash.salt;
             
             await _repository.CreateAsync(user);
 
@@ -46,13 +49,18 @@ namespace AmdarisProject.Core.Services
             (string Token, string Audience, string Issuer) authOptions)
         {
             var user = (await _repository
-                .GetByQueryAsync(u => u.UserName == userLoginDto.UserName
-                                      && u.Password == userLoginDto.Password))
+                .GetByQueryAsync(
+                    u => u.UserName == userLoginDto.UserName))
                 .FirstOrDefault();
 
             if (user is null)
             {
-                throw new Exception(); //TODO Create new exception
+                throw new NotFoundException("User with this credentials not found");
+            }
+
+            if (user.Password != Cryptography.HashString(userLoginDto.Password, user.PasswordSalt))
+            {
+                throw new ForbiddenException("Invalid username or password");
             }
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authOptions.Token));
