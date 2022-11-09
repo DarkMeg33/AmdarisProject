@@ -34,7 +34,7 @@ namespace AmdarisProject.Api.Controllers
 
             var jwtToken = await _accountService.LoginUserAsync(userLoginDto, authOptions);
 
-            return Ok(jwtToken);
+            return Ok(new { AccessToken = jwtToken });
         }
 
         [AllowAnonymous]

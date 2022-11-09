@@ -1,0 +1,18 @@
+<div class="login-page">
+    <form #form="ngForm" (ngSubmit)="login()" novalidate>
+        <h1>Sign in</h1>
+        <mat-form-field appearance="outline" class="form-group">
+            <mat-label>Username</mat-label>
+            <input [(ngModel)] ="user.userName" #userName="ngModel" type="text"  name="userName"
+            matInput placeholder="Enter username..." class="form-control" required>
+            <mat-error *ngIf="userName.invalid">Username is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-group">
+            <mat-label>Password</mat-label>
+            <input [(ngModel)] ="user.password" #password="ngModel" type="password" name="password"
+            matInput placeholder="Enter password..." class="form-control" required> 
+            <mat-error *ngIf="userName.invalid">Password is required</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Sign in</button>
+    </form>
+</div>

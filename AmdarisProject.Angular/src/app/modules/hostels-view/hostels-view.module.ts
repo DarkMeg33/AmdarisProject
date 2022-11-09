@@ -1,9 +1,9 @@
-import { ListItemViewComponent } from './../list-item-view/list-item-view.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HostelsViewComponent } from './hostels-view.component';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { FloorsViewModule } from '../floors-view/floors-view.module';
+import { ListItemViewComponent } from '../list-item-view/list-item-view.component';
 
 
 
