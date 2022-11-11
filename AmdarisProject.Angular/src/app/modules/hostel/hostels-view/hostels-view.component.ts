@@ -1,22 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hostel } from 'src/app/common/models/hostel/hostel';
-
-const _DATA: Hostel[] = [
-  {
-    id: 1,
-    hostelNumber: 1,
-    floors: [{id: 1, floorNumber: 1, hostelId: 1}, {id: 2, floorNumber: 2, hostelId: 1}, {id: 3, floorNumber: 3, hostelId: 1}],
-  },
-  {
-    id: 2,
-    hostelNumber: 2,
-  },
-  {
-    id: 3,
-    hostelNumber: 3,
-    floors: [{id: 4, floorNumber: 1, hostelId: 3}, {id: 5, floorNumber: 2, hostelId: 3}]
-  }
-];
+import { HostelService } from 'src/app/common/services/hostel.service';
 
 @Component({
   selector: 'app-hostels-view',
@@ -25,24 +9,21 @@ const _DATA: Hostel[] = [
 })
 export class HostelsViewComponent implements OnInit {
 
-  public data: Hostel[];
+  public hostels: Hostel[] | undefined;
 
-  public isExpandable: boolean = false;
-  public isOpened: boolean = false;
-
-  constructor() {
-    this.data = _DATA;
-  }
+  constructor(
+    private hostelService: HostelService
+  ) {}
 
   ngOnInit(): void {
+    this.SetHostels();
   }
 
-  public canExpand(hostel: Hostel): boolean {
-    this.isExpandable = hostel.floors ? true: false
-    return this.isExpandable;
-  }
-
-  public open() {
-    this.isOpened = !this.isOpened;
+  public SetHostels() {
+    this.hostelService.getHostels().subscribe({
+      next: (hostels) => {
+        this.hostels = hostels;
+      }
+    });
   }
 }

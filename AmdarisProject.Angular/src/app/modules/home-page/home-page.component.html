@@ -4,77 +4,7 @@
 
 <mat-sidenav-container class="home-page">
     <mat-sidenav-content class="content">
-        <!-- <table *ngIf="hostels;else hostelsUndefined">
-            <tr>
-                <td>Hostel Id</td>
-                <td>Hostel Number</td>
-            </tr>
-            <tr *ngFor="let hostel of hostels">
-                <td>Hostel id: {{ hostel.id }}</td>
-                <td>Hostel №: {{ hostel.hostelNumber }}</td>
-            </tr>
-        </table>
-        <ng-template #hostelsUndefined>
-            <mat-spinner></mat-spinner>
-        </ng-template> -->
-
         <app-hostels-view></app-hostels-view>
-
-        <!-- <div>
-            <div>
-                <table *ngIf="hostels">
-                    <tr *ngFor="let hostel of hostels">
-                        <td>Hostel id: {{ hostel.id }}</td>
-                        <td>Hostel number: {{ hostel.hostelNumber }}</td>
-                    </tr>
-                </table>
-            </div>
-            
-            <button type="sybmit" (click)="Get()">Get!</button>
-            
-            <form #form='ngForm' (ngSubmit)="GetById()">
-                <div>
-                    <label for="id">Id</label>
-                    <input type="text" name="id" [(ngModel)] = "id">
-                </div>
-                <button type="sybmit" [disabled]="!form.valid">Get!</button>
-            </form>
-            
-            <div *ngIf="hostel">
-                <ul>
-                    <li>Hostel id: {{ hostel.id }}</li>
-                    <li>Hostel number: {{ hostel.hostelNumber }}</li>
-                </ul>
-            </div>
-            
-            <form (ngSubmit)="post()" #form="ngForm">
-                <div>
-                    <label for="">HostelNumber</label>
-                    <input type="text" name="id" [(ngModel)] = "hostelNumber">
-                </div>
-                <button type="sybmit" [disabled]="!form.valid">Post!</button>
-            </form>
-            
-            <form (ngSubmit)="put()" #form="ngForm">
-                <div>
-                    <label for="">Id</label>
-                    <input type="text" name="id" [(ngModel)] = "updateHostelDto.id">
-                </div>
-                <div>
-                    <label for="">HostelNumber</label>
-                    <input type="text" name="id" [(ngModel)] = "updateHostelDto.hostelNumber">
-                </div>
-                <button type="sybmit" [disabled]="!form.valid">Put!</button>
-            </form>
-            
-            <form (ngSubmit)="delete1()" #form="ngForm">
-                <div>
-                    <label for="">Id</label>
-                    <input type="text" name="id" [(ngModel)] = "id">
-                </div>
-                <button type="sybmit" [disabled]="!form.valid">Delete!</button>
-            </form>
-        </div> -->
     </mat-sidenav-content>
     <mat-sidenav opened mode="side" position="end" class="sidebar">2</mat-sidenav>
 </mat-sidenav-container>

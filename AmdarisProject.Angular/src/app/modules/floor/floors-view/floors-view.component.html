@@ -1,10 +1,10 @@
 <div>
     <mat-list>
-        <div *ngFor="let floor of hostel.floors">
-            <app-list-item-view [title]="floor.floorNumber.toString()" [canExpand]="false">
-
+        <div *ngFor="let floor of floors">
+            <app-list-item-view [title]="'Floor: ' + floor.floorNumber.toString()" [canExpand]="floor.sections !== undefined">
+                <app-section-view [sections]="floor?.sections"></app-section-view>
             </app-list-item-view>
-            <mat-divider *ngIf="hostel.floors!.at(-1) !== floor"></mat-divider>
+            <mat-divider *ngIf="floors?.at(-1) !== floor"></mat-divider>
         </div>
     </mat-list>
 </div>

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FloorsViewComponent } from './floors-view.component';
 import { ListItemViewComponent } from '../../../common/components/list-item-view/list-item-view.component';
+import { SectionViewModule } from '../../section/section-view/section-view.module';
 
 
 
@@ -13,7 +14,8 @@ import { ListItemViewComponent } from '../../../common/components/list-item-view
   imports: [
     CommonModule,
     AngularMaterialModule,
-    ListItemViewComponent
+    ListItemViewComponent,
+    SectionViewModule
   ],
   exports: [
     FloorsViewComponent

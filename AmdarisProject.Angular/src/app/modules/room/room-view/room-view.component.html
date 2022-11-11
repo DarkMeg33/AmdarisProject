@@ -1,0 +1,10 @@
+<div>
+    <mat-list>
+        <div *ngFor="let room of rooms">
+            <mat-list-item>
+                Room: {{room.roomNumber}}
+            </mat-list-item>
+            <mat-divider *ngIf="rooms?.at(-1) !== room"></mat-divider>
+        </div>
+    </mat-list>
+</div>

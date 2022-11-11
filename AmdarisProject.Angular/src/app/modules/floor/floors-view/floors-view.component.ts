@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Hostel } from 'src/app/common/models/hostel/hostel';
+import { Floor } from 'src/app/common/models/floor/floor';
 
 @Component({
   selector: 'app-floors-view',
@@ -9,7 +9,7 @@ import { Hostel } from 'src/app/common/models/hostel/hostel';
 export class FloorsViewComponent implements OnInit {
 
   @Input()
-  public hostel!: Hostel;
+  public floors: Floor[] | undefined;
 
   constructor() { }
 

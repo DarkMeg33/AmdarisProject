@@ -4,6 +4,7 @@ import { HomePageComponent } from './home-page.component';
 import { FormsModule } from '@angular/forms';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { HostelsViewModule } from '../hostel/hostels-view/hostels-view.module';
+import { SectionViewModule } from '../section/section-view/section-view.module';
 
 
 
@@ -13,7 +14,6 @@ import { HostelsViewModule } from '../hostel/hostels-view/hostels-view.module';
   ],
   imports: [
     CommonModule,
-    FormsModule,
     AngularMaterialModule,
     HostelsViewModule
   ],
