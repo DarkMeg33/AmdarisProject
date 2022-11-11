@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Hostel } from 'src/app/models/hostel/hostel';
+import { Hostel } from 'src/app/common/models/hostel/hostel';
 
 @Component({
   selector: 'app-floors-view',

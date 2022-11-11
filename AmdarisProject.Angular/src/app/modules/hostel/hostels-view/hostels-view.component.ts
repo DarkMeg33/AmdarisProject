@@ -1,7 +1,5 @@
-import { NestedTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit } from '@angular/core';
-import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { Hostel } from 'src/app/models/hostel/hostel';
+import { Hostel } from 'src/app/common/models/hostel/hostel';
 
 const _DATA: Hostel[] = [
   {

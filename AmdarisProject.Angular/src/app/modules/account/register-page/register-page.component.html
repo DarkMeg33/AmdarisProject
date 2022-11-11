@@ -1,0 +1,21 @@
+<div class="login-page">
+    <form [formGroup]="registerForm" (ngSubmit)="register()" novalidate>
+        <h1>Sign up</h1>
+        <mat-form-field appearance="outline" class="form-group">
+            <mat-label>Username</mat-label>
+            <input type="text"  matInput formControlName="userName" placeholder="Enter username...">
+            <mat-error *ngIf="registerForm.controls['userName'].invalid">Username is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-group">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password" placeholder="Enter password..."> 
+            <mat-error *ngIf="registerForm.controls['password'].invalid">Password is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-group">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="email" placeholder="Enter email..."> 
+            <mat-error *ngIf="registerForm.controls['email'].invalid">Email is invalid</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Sign up</button>
+    </form>
+</div>

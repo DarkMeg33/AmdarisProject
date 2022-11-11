@@ -25,7 +25,7 @@ namespace AmdarisProject.Core.Services
             _mapper = mapper;
         }
 
-        public async Task<UserDto> RegisterUserAsync(UserRegisterDto userRegisterDto)
+        public async Task<bool> RegisterUserAsync(UserRegisterDto userRegisterDto)
         {
             var user = _mapper.Map<UserRegisterDto, User>(userRegisterDto);
             
@@ -33,7 +33,7 @@ namespace AmdarisProject.Core.Services
 
             if (alreadyExists.Any())
             {
-                throw new ConflictException("User with this credentials exists"); //TODO Create new exception
+                throw new ConflictException("User with this credentials exists");
             }
 
             var hash = Cryptography.HashString(user.Password);
@@ -42,7 +42,7 @@ namespace AmdarisProject.Core.Services
             
             await _repository.CreateAsync(user);
 
-            return _mapper.Map<User, UserDto>(user);
+            return true;
         }
 
         public async Task<string> LoginUserAsync(UserLoginDto userLoginDto, 

@@ -46,9 +46,10 @@ namespace AmdarisProject.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = await _accountService.RegisterUserAsync(userRegisterDto);
+            var isRegistered = await _accountService.RegisterUserAsync(userRegisterDto);
+            //TODO Create jwt token to authenticate user  
 
-            return CreatedAtAction(nameof(Register), new { id = user.Id }, user);
+            return CreatedAtAction(nameof(Register), new { registrationSucceded = isRegistered});
         }
 
         [HttpPost("logout")]

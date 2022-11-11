@@ -1,7 +1,6 @@
-import { Hostel } from './../../models/hostel/hostel';
-import { HostelService } from './../../services/hostel.service';
+import { HostelService } from '../../common/services/hostel.service';
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs';
+import { Hostel } from 'src/app/common/models/hostel/hostel';
 
 @Component({
   selector: 'app-home-page',

@@ -1,8 +1,8 @@
-import { AngularMaterialModule } from './../angular-material/angular-material.module';
+import { AngularMaterialModule } from '../../angular-material/angular-material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FloorsViewComponent } from './floors-view.component';
-import { ListItemViewComponent } from '../list-item-view/list-item-view.component';
+import { ListItemViewComponent } from '../../../common/components/list-item-view/list-item-view.component';
 
 
 

@@ -7,8 +7,7 @@ import { AppComponent } from './app.component';
 import { HomePageModule } from './modules/home-page/home-page.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './modules/angular-material/angular-material.module';
-import { LoginPageModule } from './modules/login-page/login-page.module';
-import { RegisterPageModule } from './modules/register-page/register-page.module';
+import { AccountModule } from './modules/account/account.module';
 
 @NgModule({
   declarations: [
@@ -21,8 +20,7 @@ import { RegisterPageModule } from './modules/register-page/register-page.module
     HttpClientModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
-    LoginPageModule,
-    RegisterPageModule
+    AccountModule
   ],
   providers: [],
   bootstrap: [AppComponent]

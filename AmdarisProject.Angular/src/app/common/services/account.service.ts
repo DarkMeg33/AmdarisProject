@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { JwtToken } from '../models/account/jwt-token';
-import { UserLogin } from '../models/user/user-login';
 import { UserRegister } from '../models/user/user-register';
+import { UserLogin } from '../models/user/user-login';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,12 @@ export class AccountService {
   }
 
   public login(userLogin: UserLogin): Observable<JwtToken> {
-    return this.httpClient.post<JwtToken>('/api/account/login', userLogin);
+    return this.httpClient.post<JwtToken>('/api/account/login', userLogin).pipe(
+      tap((token: JwtToken) => {
+        console.log(token.accessToken);
+        localStorage.setItem("accessToken", token.accessToken);
+      })
+    );
   }
 
   public register(userRegister: UserRegister): Observable<UserRegister> {
