@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserLogin } from 'src/app/common/models/user/user-login';
 import { AccountService } from 'src/app/common/services/account.service';
 
@@ -9,6 +10,7 @@ import { AccountService } from 'src/app/common/services/account.service';
 })
 export class LoginPageComponent implements OnInit {
 
+  private returnUrl: string = "";
   public user: UserLogin = {
     userName: "",
     password: ""
@@ -17,10 +19,13 @@ export class LoginPageComponent implements OnInit {
   password1: string = "";
 
   constructor(
-    private accountService: AccountService
+    private accountService: AccountService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
   }
 
   public login() {
@@ -34,7 +39,9 @@ export class LoginPageComponent implements OnInit {
     //   }
     // });
 
-    this.accountService.login(this.user).subscribe();
+    this.accountService.login(this.user).subscribe(() => {
+      this.router.navigate([this.returnUrl]);
+    });
   }
 
 }
