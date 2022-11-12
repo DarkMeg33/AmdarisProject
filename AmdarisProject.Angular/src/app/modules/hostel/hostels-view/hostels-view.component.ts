@@ -22,7 +22,9 @@ export class HostelsViewComponent implements OnInit {
   public SetHostels() {
     this.hostelService.getHostels().subscribe({
       next: (hostels) => {
-        this.hostels = hostels;
+        this.hostels = hostels.sort((h1, h2) => {
+          return h1.hostelNumber - h2.hostelNumber;
+        });
       }
     });
   }
