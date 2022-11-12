@@ -1,15 +1,13 @@
 ﻿using AmdarisProject.Common.Dtos.User;
 using AmdarisProject.Common.Exeptions;
-using AmdarisProject.Core.Infrastructure;
 using AmdarisProject.Core.Interfaces;
-using AmdarisProject.DataAccess.Interfaces;
 using AmdarisProject.Domain.Identity;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.AspNetCore.Identity;
 
 namespace AmdarisProject.Core.Services
 {
