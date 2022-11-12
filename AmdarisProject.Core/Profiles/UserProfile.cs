@@ -1,5 +1,5 @@
 ﻿using AmdarisProject.Common.Dtos.User;
-using AmdarisProject.Domain;
+using AmdarisProject.Domain.Identity;
 using AutoMapper;
 
 namespace AmdarisProject.Core.Profiles

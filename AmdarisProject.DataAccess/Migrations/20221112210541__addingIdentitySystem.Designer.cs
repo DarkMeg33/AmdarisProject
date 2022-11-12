@@ -4,6 +4,7 @@ using AmdarisProject.DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmdarisProject.DataAccess.Migrations
 {
     [DbContext(typeof(HostelDbContext))]
-    partial class HostelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221112210541__addingIdentitySystem")]
+    partial class _addingIdentitySystem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,7 +94,7 @@ namespace AmdarisProject.DataAccess.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("Roles", "Identity");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("AmdarisProject.Domain.Identity.RoleClaim", b =>
@@ -116,7 +118,7 @@ namespace AmdarisProject.DataAccess.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("RoleClaims", "Identity");
+                    b.ToTable("RoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("AmdarisProject.Domain.Identity.User", b =>
@@ -164,7 +166,7 @@ namespace AmdarisProject.DataAccess.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("RoomId")
+                    b.Property<int>("RoomId")
                         .HasColumnType("int");
 
                     b.Property<string>("SecurityStamp")
@@ -189,7 +191,7 @@ namespace AmdarisProject.DataAccess.Migrations
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("Users", "Identity");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("AmdarisProject.Domain.Identity.UserClaim", b =>
@@ -213,7 +215,7 @@ namespace AmdarisProject.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserClaims", "Identity");
+                    b.ToTable("UserClaims", (string)null);
                 });
 
             modelBuilder.Entity("AmdarisProject.Domain.Identity.UserLogin", b =>
@@ -234,7 +236,7 @@ namespace AmdarisProject.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserLogins", "Identity");
+                    b.ToTable("UserLogins", (string)null);
                 });
 
             modelBuilder.Entity("AmdarisProject.Domain.Identity.UserRole", b =>
@@ -249,7 +251,7 @@ namespace AmdarisProject.DataAccess.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserRole", "Identity");
+                    b.ToTable("UserRole", (string)null);
                 });
 
             modelBuilder.Entity("AmdarisProject.Domain.Identity.UserToken", b =>
@@ -268,7 +270,7 @@ namespace AmdarisProject.DataAccess.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("UserTokens", "Identity");
+                    b.ToTable("UserRoles", (string)null);
                 });
 
             modelBuilder.Entity("AmdarisProject.Domain.Room", b =>
@@ -358,7 +360,9 @@ namespace AmdarisProject.DataAccess.Migrations
                 {
                     b.HasOne("AmdarisProject.Domain.Room", "Room")
                         .WithMany("Tenants")
-                        .HasForeignKey("RoomId");
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Room");
                 });

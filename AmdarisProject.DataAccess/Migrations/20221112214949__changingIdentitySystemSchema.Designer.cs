@@ -4,6 +4,7 @@ using AmdarisProject.DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmdarisProject.DataAccess.Migrations
 {
     [DbContext(typeof(HostelDbContext))]
-    partial class HostelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221112214949__changingIdentitySystemSchema")]
+    partial class _changingIdentitySystemSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,7 +270,7 @@ namespace AmdarisProject.DataAccess.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("UserTokens", "Identity");
+                    b.ToTable("UserRoles", "Identity");
                 });
 
             modelBuilder.Entity("AmdarisProject.Domain.Room", b =>

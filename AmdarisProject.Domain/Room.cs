@@ -1,4 +1,6 @@
-﻿namespace AmdarisProject.Domain
+﻿using AmdarisProject.Domain.Identity;
+
+namespace AmdarisProject.Domain
 {
     public class Room : BaseEntity
     {

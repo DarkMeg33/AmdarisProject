@@ -1,66 +1,53 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-using AmdarisProject.Common.Dtos.User;
+﻿using AmdarisProject.Common.Dtos.User;
 using AmdarisProject.Common.Exeptions;
 using AmdarisProject.Core.Infrastructure;
 using AmdarisProject.Core.Interfaces;
 using AmdarisProject.DataAccess.Interfaces;
-using AmdarisProject.Domain;
+using AmdarisProject.Domain.Identity;
 using AutoMapper;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace AmdarisProject.Core.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly IRepository<User> _repository;
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
 
-        public AccountService(IRepository<User> repository, IMapper mapper)
+        public AccountService(IMapper mapper, SignInManager<User> signInManager, UserManager<User> userManager)
         {
-            _repository = repository;
             _mapper = mapper;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         public async Task<bool> RegisterUserAsync(UserRegisterDto userRegisterDto)
         {
             var user = _mapper.Map<UserRegisterDto, User>(userRegisterDto);
-            
-            var alreadyExists = await _repository.GetByQueryAsync(u => u.UserName == user.UserName);
 
-            if (alreadyExists.Any())
+            var identityResult = await _userManager.CreateAsync(user, userRegisterDto.Password);
+
+            if (!identityResult.Succeeded)
             {
-                throw new ConflictException("User with this credentials exists");
+                throw new ConflictException("User with this credentials exists"); //TODO Change exception
             }
-
-            var hash = Cryptography.HashString(user.Password);
-            user.Password = hash.hashed;
-            user.PasswordSalt = hash.salt;
-            
-            await _repository.CreateAsync(user);
 
             return true;
         }
 
-        public async Task<string> LoginUserAsync(UserLoginDto userLoginDto, 
+        public async Task<string> LoginUserAsync(UserLoginDto userLoginDto,
             (string Token, string Audience, string Issuer) authOptions)
         {
-            var user = (await _repository
-                .GetByQueryAsync(
-                    u => u.UserName == userLoginDto.UserName))
-                .FirstOrDefault();
+            var signResult = await _signInManager.PasswordSignInAsync(userLoginDto.UserName, userLoginDto.Password, false, false);
 
-            if (user is null)
+            if (!signResult.Succeeded)
             {
-                throw new NotFoundException("User with this credentials not found");
-            }
-
-            if (user.Password != Cryptography.HashString(userLoginDto.Password, user.PasswordSalt))
-            {
-                throw new ForbiddenException("Invalid username or password");
+                throw new NotFoundException("User with this credentials not found"); //TODO Change exception
             }
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authOptions.Token));
@@ -68,9 +55,7 @@ namespace AmdarisProject.Core.Services
 
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name, userLoginDto.UserName),
                 new Claim(ClaimTypes.Role, "Admin")
             };
 
