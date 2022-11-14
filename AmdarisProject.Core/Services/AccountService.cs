@@ -26,13 +26,20 @@ namespace AmdarisProject.Core.Services
 
         public async Task<bool> RegisterUserAsync(UserRegisterDto userRegisterDto)
         {
+            var existingUser =await _userManager.FindByNameAsync(userRegisterDto.UserName);
+
+            if (existingUser is not null)
+            {
+                throw new ConflictException("User with this credentials exists");
+            }
+
             var user = _mapper.Map<UserRegisterDto, User>(userRegisterDto);
 
             var identityResult = await _userManager.CreateAsync(user, userRegisterDto.Password);
 
             if (!identityResult.Succeeded)
             {
-                throw new ConflictException("User with this credentials exists"); //TODO Change exception
+                throw new Exception("An error happened"); //TODO Change exception
             }
 
             return true;
@@ -41,11 +48,18 @@ namespace AmdarisProject.Core.Services
         public async Task<string> LoginUserAsync(UserLoginDto userLoginDto,
             (string Token, string Audience, string Issuer) authOptions)
         {
-            var signResult = await _signInManager.PasswordSignInAsync(userLoginDto.UserName, userLoginDto.Password, false, false);
+            var existingUser = await _userManager.FindByNameAsync(userLoginDto.UserName);
+
+            if (existingUser is not null)
+            {
+                throw new NotFoundException("User with this credentials not found");
+            }
+
+            var signResult = await _signInManager.CheckPasswordSignInAsync(existingUser, userLoginDto.Password, false);
 
             if (!signResult.Succeeded)
             {
-                throw new NotFoundException("User with this credentials not found"); //TODO Change exception
+                throw new Exception("An error happened"); //TODO Change exception
             }
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authOptions.Token));

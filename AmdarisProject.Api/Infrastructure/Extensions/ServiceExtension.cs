@@ -11,7 +11,11 @@ namespace AmdarisProject.Api.Infrastructure.Extensions
         public static void AddJwtAuth(this IServiceCollection services, JwtAuthOptions jwtAuthOptions)
         {
             services
-                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
                 .AddJwtBearer(options =>
                 {
                     options.TokenValidationParameters = new TokenValidationParameters()
