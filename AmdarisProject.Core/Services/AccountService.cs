@@ -50,7 +50,7 @@ namespace AmdarisProject.Core.Services
         {
             var existingUser = await _userManager.FindByNameAsync(userLoginDto.UserName);
 
-            if (existingUser is not null)
+            if (existingUser is null)
             {
                 throw new NotFoundException("User with this credentials not found");
             }
@@ -59,7 +59,7 @@ namespace AmdarisProject.Core.Services
 
             if (!signResult.Succeeded)
             {
-                throw new Exception("An error happened"); //TODO Change exception
+                throw new ForbiddenException("Wrong user name or password");
             }
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authOptions.Token));
