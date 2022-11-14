@@ -1,4 +1,5 @@
 ﻿using AmdarisProject.Common.Dtos.Hostel;
+using AmdarisProject.Common.Models;
 using AmdarisProject.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
@@ -22,6 +23,13 @@ namespace AmdarisProject.Api.Controllers
             var hostels = await _hostelService.GetHostelsAsync();
 
             return Ok(hostels);
+        }
+
+        [HttpPost("pagination")]
+        public async Task<IActionResult> GetPagedHostel([FromBody] PaginationRequest paginationRequest)
+        {
+            var paginatedHostels = await _hostelService.GetPaginatedHostelsAsync(paginationRequest);
+            return Ok(paginatedHostels);
         }
 
         [HttpGet("{id}")]

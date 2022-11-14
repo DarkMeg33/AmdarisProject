@@ -1,5 +1,6 @@
 ﻿using AmdarisProject.Domain;
 using System.Linq.Expressions;
+using AmdarisProject.Common.Models;
 
 namespace AmdarisProject.DataAccess.Interfaces
 {
@@ -7,6 +8,7 @@ namespace AmdarisProject.DataAccess.Interfaces
     {
         Task<T> GetByIdAsync(int id);
         Task<IList<T>> GetAllAsync();
+        Task<PaginationResult<T>> GetPagedAsync(PaginationRequest paginationRequest);
         Task<IList<T>> GetByQueryAsync(Expression<Func<T, bool>> predicate);
         Task<T> GetByIdWithIncludeAsync(int id, params Expression<Func<T, object>>[] includeProperties);
         Task CreateAsync(T entity);

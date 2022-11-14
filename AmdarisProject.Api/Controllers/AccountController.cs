@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace AmdarisProject.Api.Controllers
 {
+    [Authorize]
     [Route("api/account")]
     public class AccountController : AppControllerBase
     {

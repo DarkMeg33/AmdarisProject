@@ -20,9 +20,6 @@ builder.Services.AddDbContext<HostelDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityDb"));
 });
 
-var jwtAuthOptions = builder.Configuration.ConfigureJwtAuthOptions(builder.Services);
-
-builder.Services.AddJwtAuth(jwtAuthOptions);
 builder.Services.AddIdentity<User, Role>(options =>
 {
     options.Password.RequireNonAlphanumeric = false;
@@ -30,6 +27,11 @@ builder.Services.AddIdentity<User, Role>(options =>
     options.Password.RequireDigit = false;
     options.Password.RequiredLength = 1;
 }).AddEntityFrameworkStores<HostelDbContext>();
+
+var jwtAuthOptions = builder.Configuration.ConfigureJwtAuthOptions(builder.Services);
+
+builder.Services.AddJwtAuth(jwtAuthOptions);
+
 
 builder.Services.AddAutoMapper(typeof(CoreAssemblyMarker));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EFCoreRepository<>));

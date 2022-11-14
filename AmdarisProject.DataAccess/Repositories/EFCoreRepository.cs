@@ -2,6 +2,8 @@
 using AmdarisProject.Domain;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using AmdarisProject.Common.Models;
+using AmdarisProject.DataAccess.Extensions;
 
 namespace AmdarisProject.DataAccess.Repositories
 {
@@ -24,6 +26,11 @@ namespace AmdarisProject.DataAccess.Repositories
         public async Task<IList<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
+        }
+
+        public async Task<PaginationResult<T>> GetPagedAsync(PaginationRequest paginationRequest)
+        {
+            return await _dbSet.GetPaginationResultAsync(paginationRequest);
         }
 
         public async Task<IList<T>> GetByQueryAsync(Expression<Func<T, bool>> predicate)

@@ -1,5 +1,6 @@
 ﻿using AmdarisProject.Common.Dtos.Hostel;
 using AmdarisProject.Common.Exeptions;
+using AmdarisProject.Common.Models;
 using AmdarisProject.Core.Interfaces;
 using AmdarisProject.DataAccess.Interfaces;
 using AmdarisProject.Domain;
@@ -23,6 +24,12 @@ namespace AmdarisProject.Core.Services
             var hostels = await _repository.GetAllHostelsWithIncludeAsync();
 
             return hostels.Select(hostel => _mapper.Map<Hostel, HostelDto>(hostel)).ToList();
+        }
+
+        public async Task<PaginationResult<HostelDto>> GetPaginatedHostelsAsync(PaginationRequest paginationRequest)
+        {
+            var hostelsPaginationResult = await _repository.GetPagedAsync(paginationRequest);
+            return _mapper.Map<PaginationResult<Hostel>, PaginationResult<HostelDto>>(hostelsPaginationResult);
         }
 
         public async Task<HostelDto> GetHostelByIdAsync(int id)
