@@ -28,7 +28,7 @@ namespace AmdarisProject.Core.Services
 
         public async Task<PaginationResult<HostelDto>> GetPaginatedHostelsAsync(PaginationRequest paginationRequest)
         {
-            var hostelsPaginationResult = await _repository.GetPagedAsync(paginationRequest);
+            var hostelsPaginationResult = await _repository.GetAllHostelsWithPaginate(paginationRequest);
             return _mapper.Map<PaginationResult<Hostel>, PaginationResult<HostelDto>>(hostelsPaginationResult);
         }
 

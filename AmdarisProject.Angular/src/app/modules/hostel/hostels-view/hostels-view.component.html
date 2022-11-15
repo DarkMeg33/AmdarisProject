@@ -1,10 +1,22 @@
 <div class="hostels-container">
     <mat-list>
         <div *ngFor="let hostel of hostels">
-            <app-list-item-view [title]="'Hostel: ' + hostel.hostelNumber.toString()" [canExpand]="hostel.floors !== undefined">
+            <app-list-item-view [title]="'Hostel: ' + hostel.hostelNumber.toString()" 
+                                [canExpand]="hostel?.floors?.length! > 0"
+                                (onDelete)="deleteHostel(hostel.id)"
+                                (onEdit)="editHostel(hostel)">
                 <app-floors-view [floors]="hostel?.floors"></app-floors-view>
             </app-list-item-view>
             <mat-divider *ngIf="hostels?.at(-1) !== hostel"></mat-divider>
         </div>
     </mat-list>
+    <div class="paginator-container">
+        <button mat-raised-button color="primary" (click)="editHostel()">Create hostel</button>
+        <mat-paginator [length]="paginationResult?.totalItems"
+              [pageSize]="paginator?.pageSize"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page"
+              (page)="setHostels()">
+        </mat-paginator>
+    </div>
 </div>

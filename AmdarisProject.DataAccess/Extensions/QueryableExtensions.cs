@@ -24,7 +24,7 @@ namespace AmdarisProject.DataAccess.Extensions
 
         private static IQueryable<T> Paginate<T>(this IQueryable<T> query, PaginationRequest paginationRequest)
         {
-            return query.Skip((paginationRequest.PageIndex - 1) * paginationRequest.PageSize).Take(paginationRequest.PageSize);
+            return query.Skip(paginationRequest.PageIndex * paginationRequest.PageSize).Take(paginationRequest.PageSize);
         }
     }
 }

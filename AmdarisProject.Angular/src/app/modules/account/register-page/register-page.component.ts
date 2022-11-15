@@ -29,14 +29,6 @@ export class RegisterPageComponent implements OnInit {
   public register() {
     const user: UserRegister = this.registerForm.value;
     this.accountService.register(user).subscribe();
-
-    // this.accountService.register(user).subscribe({
-    //   next: () => {
-    //     const userLogin = user;
-
-    //     this.accountService.login(userLogin);
-    //   }
-    // })
   }
 
 }

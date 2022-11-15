@@ -1,7 +1,7 @@
 <div>
     <mat-list>
         <div *ngFor="let section of sections">
-            <app-list-item-view [title]="'Section: ' + section.sectionNumber.toString()" [canExpand]="section.rooms !== undefined">
+            <app-list-item-view [title]="'Section: ' + section.sectionNumber.toString()" [canExpand]="section.rooms?.length! > 0">
                 <app-room-view [rooms] = "section?.rooms"></app-room-view>
             </app-list-item-view>
             <mat-divider *ngIf="sections?.at(-1) !== section"></mat-divider>
