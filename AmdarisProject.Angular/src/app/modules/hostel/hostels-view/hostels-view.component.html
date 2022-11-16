@@ -17,6 +17,7 @@
                     </mat-radio-button>
                 </mat-radio-group>
                 <h2>Filter options</h2>
+                <mat-slide-toggle (change)="setHostels()" [(ngModel)]="hideHostelStatus">Hide empty hostels</mat-slide-toggle>
             </div>
         </mat-menu>
     </div>

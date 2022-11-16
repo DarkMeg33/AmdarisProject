@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatRadioGroup } from '@angular/material/radio';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Hostel } from 'src/app/common/models/hostel/hostel';
+import { Filter } from 'src/app/common/models/pagination/filter';
+import { FilterRequest } from 'src/app/common/models/pagination/filter-request';
 import { PaginationRequest } from 'src/app/common/models/pagination/pagination-request';
 import { PaginationResult } from 'src/app/common/models/pagination/pagination-result';
 import { SortDirection } from 'src/app/common/models/pagination/sort-direction';
@@ -26,6 +28,7 @@ export class HostelsViewComponent implements OnInit, AfterViewInit {
   paginator: MatPaginator | undefined;
 
   public sortingDirection: string = "0";
+  public hideHostelStatus = false;
 
   constructor(
     private hostelService: HostelService,
@@ -40,11 +43,30 @@ export class HostelsViewComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
 
+  public hideEmptyHostels(): Filter | undefined {
+    if (this.hideHostelStatus) {
+      this.paginator!.pageIndex = 0;
+      
+      return {
+        path: this.hideHostelStatus ? "Floors.Count > " : "",
+        value: "0"
+      };
+    }
+
+    return undefined;
+  }
+
   public setHostels() {
+    let filterRequest = new FilterRequest();
+
+    if (this.hideEmptyHostels()) {
+      filterRequest.filters.push(this.hideEmptyHostels()!);
+    }
+
     let sortingRequest = new SortingRequest("HostelNumber", 
       this.sortingDirection === "0" ? SortDirection.Ascending : SortDirection.Descending);
 
-    let paginationRequest = new PaginationRequest(this.paginator!, sortingRequest);
+    let paginationRequest = new PaginationRequest(this.paginator!, sortingRequest, filterRequest);
     this.hostelService.getPagedHostels(paginationRequest).subscribe((result) => {
       this.paginationResult = result;
       this.hostels = result.items;
