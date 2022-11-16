@@ -1,4 +1,25 @@
 <div class="hostels-container">
+    <div class="filter-btn">
+        <button mat-raised-button color="primary" [matMenuTriggerFor]="filterMenu">Filter</button>
+        <mat-menu #filterMenu="matMenu" xPosition="before">
+            <div class="menu-container">
+                <h2><label id="example-radio-group-label">Sort direction</label></h2>
+                <mat-radio-group
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group"
+                    [(ngModel)] = "sortingDirection"
+                    (change)="setHostels()">
+                    <mat-radio-button class="example-radio-button" value="0">
+                        Ascending
+                    </mat-radio-button>
+                    <mat-radio-button class="example-radio-button" value="1">
+                        Descending
+                    </mat-radio-button>
+                </mat-radio-group>
+                <h2>Filter options</h2>
+            </div>
+        </mat-menu>
+    </div>
     <mat-list>
         <div *ngFor="let hostel of hostels">
             <app-list-item-view [title]="'Hostel: ' + hostel.hostelNumber.toString()" 

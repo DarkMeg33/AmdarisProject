@@ -2,7 +2,6 @@
 using AmdarisProject.Common.Models;
 using AmdarisProject.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 namespace AmdarisProject.Api.Controllers
 {
@@ -18,7 +17,7 @@ namespace AmdarisProject.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetHostels() //TODO Create pagination, filters 
+        public async Task<IActionResult> GetHostels()
         {
             var hostels = await _hostelService.GetHostelsAsync();
 

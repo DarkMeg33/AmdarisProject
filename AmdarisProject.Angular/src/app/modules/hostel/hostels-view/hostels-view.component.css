@@ -1,6 +1,29 @@
 .paginator-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 30px;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 30px;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.menu-container {
+  padding: 0px 10px;
+  min-width: 150px;
 }

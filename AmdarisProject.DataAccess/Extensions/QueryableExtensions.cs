@@ -1,5 +1,6 @@
 ﻿using AmdarisProject.Common.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Dynamic.Core;
 
 namespace AmdarisProject.DataAccess.Extensions
 {
@@ -10,6 +11,8 @@ namespace AmdarisProject.DataAccess.Extensions
         {
             var totalItems = await query.CountAsync();
             query = query.Paginate(paginationRequest);
+
+            query = query.Sort(paginationRequest.SortingRequest);
 
             var items = await query.ToListAsync();
 
@@ -25,6 +28,17 @@ namespace AmdarisProject.DataAccess.Extensions
         private static IQueryable<T> Paginate<T>(this IQueryable<T> query, PaginationRequest paginationRequest)
         {
             return query.Skip(paginationRequest.PageIndex * paginationRequest.PageSize).Take(paginationRequest.PageSize);
+        }
+
+        private static IQueryable<T> Sort<T>(this IQueryable<T> query, SortingRequest sortingRequest)
+        {
+            if (!string.IsNullOrWhiteSpace(sortingRequest.ColumnName))
+            {
+                query = query.OrderBy(sortingRequest.ColumnName + " " 
+                    + (sortingRequest.SortDirection == SortDirection.Ascending ? "asc" : "desc"));
+            }
+
+            return query;
         }
     }
 }

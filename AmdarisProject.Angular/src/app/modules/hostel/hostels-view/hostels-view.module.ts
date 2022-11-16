@@ -5,6 +5,7 @@ import { AngularMaterialModule } from '../../angular-material/angular-material.m
 import { FloorsViewModule } from '../../floor/floors-view/floors-view.module';
 import { ListItemViewComponent } from '../../../common/components/list-item-view/list-item-view.component';
 import { HostelEditModule } from '../hostel-edit/hostel-edit.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +18,8 @@ import { HostelEditModule } from '../hostel-edit/hostel-edit.module';
     AngularMaterialModule,
     FloorsViewModule,
     ListItemViewComponent,
-    HostelEditModule
+    HostelEditModule,
+    FormsModule
   ],
   exports: [
     HostelsViewComponent

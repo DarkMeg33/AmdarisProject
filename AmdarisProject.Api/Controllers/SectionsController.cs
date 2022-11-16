@@ -16,7 +16,7 @@ namespace AmdarisProject.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetSections() //TODO Create pagination, filters 
+        public async Task<IActionResult> GetSections()
         {
             var sections = await _sectionService.GetSectionsAsync();
 

@@ -16,7 +16,7 @@ namespace AmdarisProject.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetRooms() //TODO Create pagination, filters 
+        public async Task<IActionResult> GetRooms()
         {
             var rooms = await _roomService.GetRoomsAsync();
 
