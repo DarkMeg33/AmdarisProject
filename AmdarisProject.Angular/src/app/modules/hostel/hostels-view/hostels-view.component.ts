@@ -57,6 +57,7 @@ export class HostelsViewComponent implements OnInit, AfterViewInit {
   }
 
   public setHostels() {
+    this.hostels = undefined;
     let filterRequest = new FilterRequest();
 
     if (this.hideEmptyHostels()) {

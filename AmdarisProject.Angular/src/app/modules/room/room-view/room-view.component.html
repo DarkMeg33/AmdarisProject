@@ -1,8 +1,15 @@
 <div>
+    <div>
+        <button mat-raised-button color="primary" (click)="editRoom()" style="margin-left: 30px;">Create room</button>
+    </div>
     <mat-list>
         <div *ngFor="let room of rooms">
             <mat-list-item>
                 Room: {{room.roomNumber}}
+                <button mat-icon-button (click)="editRoom(room)">
+                    <mat-icon color="primary">edit</mat-icon>
+                </button>
+                <app-delete-btn (onDelete)="deleteRoom(room.id)"></app-delete-btn>
             </mat-list-item>
             <mat-divider *ngIf="rooms?.at(-1) !== room"></mat-divider>
         </div>

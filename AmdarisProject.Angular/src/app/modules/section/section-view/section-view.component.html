@@ -1,8 +1,18 @@
 <div>
+    <div>
+        <button mat-raised-button color="primary" (click)="editSection()" style="margin-left: 30px;">Create section</button>
+    </div>
     <mat-list>
         <div *ngFor="let section of sections">
-            <app-list-item-view [title]="'Section: ' + section.sectionNumber.toString()" [canExpand]="section.rooms?.length! > 0">
-                <app-room-view [rooms] = "section?.rooms"></app-room-view>
+            <app-list-item-view 
+                [title]="'Section: ' + section.sectionNumber.toString()" 
+                [canExpand]="section.rooms?.length! > 0"
+                (onDelete)="deleteSection(section.id)"
+                (onEdit)="editSection(section)">
+                <app-room-view 
+                    [rooms] = "section?.rooms"
+                    (onRoomChange)="sectionChanged()"
+                    [sectionId]="section.id"></app-room-view>
             </app-list-item-view>
             <mat-divider *ngIf="sections?.at(-1) !== section"></mat-divider>
         </div>

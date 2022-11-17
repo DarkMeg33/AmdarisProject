@@ -22,15 +22,20 @@
         </mat-menu>
     </div>
     <mat-list>
-        <div *ngFor="let hostel of hostels">
-            <app-list-item-view [title]="'Hostel: ' + hostel.hostelNumber.toString()" 
-                                [canExpand]="hostel?.floors?.length! > 0"
-                                (onDelete)="deleteHostel(hostel.id)"
-                                (onEdit)="editHostel(hostel)">
-                <app-floors-view [floors]="hostel?.floors"></app-floors-view>
-            </app-list-item-view>
-            <mat-divider *ngIf="hostels?.at(-1) !== hostel"></mat-divider>
+        <div *ngIf="hostels === undefined;else hostelsView ">
+            <mat-spinner></mat-spinner>
         </div>
+        <ng-template #hostelsView >
+            <div *ngFor="let hostel of hostels">
+                <app-list-item-view [title]="'Hostel: ' + hostel.hostelNumber.toString()" 
+                                    [canExpand]="hostel?.floors?.length! > 0"
+                                    (onDelete)="deleteHostel(hostel.id)"
+                                    (onEdit)="editHostel(hostel)">
+                    <app-floors-view [floors]="hostel?.floors" [hostelId]="hostel.id" (onFloorChange)="setHostels()"></app-floors-view>
+                </app-list-item-view>
+                <mat-divider *ngIf="hostels?.at(-1) !== hostel"></mat-divider>
+            </div>
+        </ng-template>
     </mat-list>
     <div class="paginator-container">
         <button mat-raised-button color="primary" (click)="editHostel()">Create hostel</button>

@@ -4,6 +4,7 @@ import { SectionViewComponent } from './section-view.component';
 import { AngularMaterialModule } from '../../angular-material/angular-material.module';
 import { ListItemViewComponent } from 'src/app/common/components/list-item-view/list-item-view.component';
 import { RoomViewModule } from '../../room/room-view/room-view.module';
+import { SectionEditModule } from '../section-edit/section-edit.module';
 
 
 
@@ -15,7 +16,8 @@ import { RoomViewModule } from '../../room/room-view/room-view.module';
     CommonModule,
     AngularMaterialModule,
     ListItemViewComponent,
-    RoomViewModule
+    RoomViewModule,
+    SectionEditModule
   ],
   exports: [
     SectionViewComponent

@@ -1,8 +1,15 @@
 <div>
+    <div>
+        <button mat-raised-button color="primary" (click)="editFloor()" style="margin-left: 30px;">Create floor</button>
+    </div>
     <mat-list>
         <div *ngFor="let floor of floors">
-            <app-list-item-view [title]="'Floor: ' + floor.floorNumber.toString()" [canExpand]="floor.sections?.length! > 0">
-                <app-section-view [sections]="floor?.sections"></app-section-view>
+            <app-list-item-view 
+                [title]="'Floor: ' + floor.floorNumber.toString()" 
+                [canExpand]="floor.sections?.length! > 0"
+                (onDelete)="deleteFloor(floor.id)"
+                (onEdit)="editFloor(floor)">
+                <app-section-view [sections]="floor?.sections" (onSectionChange)="floorChanged()" [floorId]="floor.id"></app-section-view>
             </app-list-item-view>
             <mat-divider *ngIf="floors?.at(-1) !== floor"></mat-divider>
         </div>
