@@ -4,6 +4,7 @@ namespace AmdarisProject.Common.Dtos.Room
 {
     public class RoomUpdateDto
     {
+        //TODO Finish validation
         [Range(1, Int32.MaxValue)]
         public int RoomNumber { get; set; }
         public int BedCount { get; set; }

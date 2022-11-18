@@ -1,14 +1,34 @@
 <form [formGroup]="roomEditForm" (ngSubmit)="editRoom()" novalidate>
     <mat-dialog-content>
         <h1 color="primary">{{title}}</h1>
-        <mat-form-field appearance="outline" class="form-group">
-            <mat-label>Room number</mat-label>
-            <input type="text" matInput formControlName="roomNumber" placeholder="Enter room number...">
-            <mat-error *ngIf="roomEditForm.controls['roomNumber'].invalid">Room number is required</mat-error>
-        </mat-form-field>
+        <mat-list>
+            <mat-list-item>
+                <mat-form-field appearance="outline" class="form-group">
+                    <mat-label>Room number</mat-label>
+                    <input type="text" matInput formControlName="roomNumber" placeholder="Enter room number...">
+                    <mat-error *ngIf="roomEditForm.controls['roomNumber'].invalid">Room number is required</mat-error>
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <input 
+                    #fileUpload 
+                    type="file" 
+                    formControlName="image" 
+                    accept="image/png, image/jpeg" 
+                    (change)="onImageChanged($event)" 
+                    hidden>
+                <button mat-raised-button (click)="fileUpload.click()" color="primary" type="button">Upload image</button>
+                <mat-error *ngIf="roomEditForm.controls['image'].invalid">Image is required</mat-error>
+            </mat-list-item>
+        </mat-list>
     </mat-dialog-content>
     <mat-dialog-actions>
-        <button mat-raised-button [mat-dialog-close]="room.id !==0 ? ACTION_UPDATE : ACTION_CREATE" color="primary" type="submit">Save</button>
+        <button 
+            mat-raised-button 
+            [mat-dialog-close]="room.id !==0 ? ACTION_UPDATE : ACTION_CREATE" 
+            color="primary" 
+            type="submit"
+            [disabled]="roomEditForm.invalid">Save</button>
         <button mat-raised-button [mat-dialog-close]="ACTION_CANCEL" color="basic">Cancel</button>
     </mat-dialog-actions>
 </form>

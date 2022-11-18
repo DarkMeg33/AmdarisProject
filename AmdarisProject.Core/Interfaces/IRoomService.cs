@@ -8,6 +8,6 @@ namespace AmdarisProject.Core.Interfaces
         Task<RoomDto> GetRoomByIdAsync(int id);
         Task<RoomDto> CreateRoomAsync(RoomUpdateDto roomUpdateDto);
         Task<RoomDto> UpdateRoomAsync(int id, RoomUpdateDto roomUpdateDto);
-        Task DeleteRoomAsync(int id);
+        Task DeleteRoomAsync(int id, string imageUploadPath);
     }
 }

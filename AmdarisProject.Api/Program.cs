@@ -28,6 +28,8 @@ builder.Services.AddIdentity<User, Role>(options =>
     options.Password.RequiredLength = 1;
 }).AddEntityFrameworkStores<HostelDbContext>();
 
+builder.Configuration.ConfigureFileManagerOptions(builder.Services);
+
 var jwtAuthOptions = builder.Configuration.ConfigureJwtAuthOptions(builder.Services);
 
 builder.Services.AddJwtAuth(jwtAuthOptions);
@@ -42,6 +44,7 @@ builder.Services.AddScoped<ISectionService, SectionService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IHostelRepository, HostelRepository>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IImageService, ImageService>();
 
 var app = builder.Build();
 

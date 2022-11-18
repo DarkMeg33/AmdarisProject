@@ -11,11 +11,13 @@ namespace AmdarisProject.Core.Services
     {
         private readonly IRepository<Room> _repository;
         private readonly IMapper _mapper;
+        private readonly IImageService _imageService;
 
-        public RoomService(IRepository<Room> repository, IMapper mapper)
+        public RoomService(IRepository<Room> repository, IMapper mapper, IImageService imageService)
         {
             _repository = repository;
             _mapper = mapper;
+            _imageService = imageService;
         }
 
         public async Task<IList<RoomDto>> GetRoomsAsync()
@@ -61,12 +63,13 @@ namespace AmdarisProject.Core.Services
             return _mapper.Map<Room, RoomDto>(room);
         }
 
-        public async Task DeleteRoomAsync(int id)
+        public async Task DeleteRoomAsync(int id, string imageUploadPath)
         {
             var room = await _repository.GetByIdAsync(id);
 
             if (room is null) throw new NotFoundException("Room isn't exists.");
 
+            await _imageService.DeleteImageAsync(id, imageUploadPath);
             await _repository.DeleteByIdAsync(id);
         }
     }

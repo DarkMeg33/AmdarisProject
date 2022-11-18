@@ -1,6 +1,8 @@
-﻿using AmdarisProject.Common.Dtos.Room;
+﻿using AmdarisProject.Api.Infrastructure.Configurations;
+using AmdarisProject.Common.Dtos.Room;
 using AmdarisProject.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace AmdarisProject.Api.Controllers
 {
@@ -9,10 +11,12 @@ namespace AmdarisProject.Api.Controllers
     {
         //TODO Handle all ways, add new api exceptions
         private readonly IRoomService _roomService;
+        private readonly FileManagerOptions _fileManagerOptions;
 
-        public RoomsController(IRoomService roomService)
+        public RoomsController(IRoomService roomService, IOptions<FileManagerOptions> fileManagerOptions)
         {
             _roomService = roomService;
+            _fileManagerOptions = fileManagerOptions.Value;
         }
 
         [HttpGet]
@@ -45,22 +49,22 @@ namespace AmdarisProject.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateRoom(int id, [FromBody] RoomUpdateDto roomUpdateDto)
+        public async Task<ActionResult<RoomDto>> UpdateRoom(int id, [FromBody] RoomUpdateDto roomUpdateDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _roomService.UpdateRoomAsync(id, roomUpdateDto);
+            var roomDto = await _roomService.UpdateRoomAsync(id, roomUpdateDto);
 
-            return NoContent();
+            return roomDto;
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRoom(int id)
         {
-            await _roomService.DeleteRoomAsync(id);
+            await _roomService.DeleteRoomAsync(id, _fileManagerOptions.Path);
             return NoContent();
         }
     }

@@ -12,5 +12,11 @@ namespace AmdarisProject.Api.Infrastructure.Extensions
             var authOptions = section.Get<JwtAuthOptions>();
             return authOptions;
         }
+
+        public static void ConfigureFileManagerOptions(this IConfiguration configuration, IServiceCollection services)
+        {
+            var section = configuration.GetSection("FileManagerOptions");
+            services.Configure<FileManagerOptions>(section);
+        }
     }
 }

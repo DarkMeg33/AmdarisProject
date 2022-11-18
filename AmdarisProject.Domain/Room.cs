@@ -13,5 +13,6 @@ namespace AmdarisProject.Domain
         public int SectionId { get; set; }
         public Section Section { get; set; }
         public IList<User> Tenants { get; set; }
+        public Image Image { get; set; }
     }
 }
