@@ -13,5 +13,6 @@ export class HomePageComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.dataTransferService.dataSubject.subscribe()
   }
 }

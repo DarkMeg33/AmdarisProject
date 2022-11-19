@@ -2,6 +2,7 @@
 using System;
 using System.Net;
 using AmdarisProject.Common.Exeptions;
+using AmdarisProject.Common.Models;
 using AmdarisProject.Core.Interfaces;
 using AmdarisProject.DataAccess.Interfaces;
 using AmdarisProject.Domain;
@@ -20,9 +21,14 @@ namespace AmdarisProject.Core.Services
             _repository = repository;
         }
 
-        public async Task<IActionResult> GetImageAsync(int roomId, string uploadPath)
+        public async Task<ImageToReturn> GetImageAsync(int roomId, string uploadPath)
         {
             var image = await _repository.GetByIdAsync(roomId);
+
+            if (image is null)
+            {
+                throw new NotFoundException("Image don't found");
+            }
 
             var fullPath = Path.Combine(uploadPath, image.Path);
 
@@ -37,9 +43,12 @@ namespace AmdarisProject.Core.Services
             var contentType = "APPLICATION/octet-stream";
             var fileName = Path.GetFileName(fullPath);
 
-            throw new NotImplementedException();
-
-            // return File(memory, contentType, fileName);
+            return new ImageToReturn()
+            {
+                ImageName = fileName,
+                ContentType = contentType,
+                Image = memory
+            };
         }
 
         public async Task CreateImageAsync(IFormFile file, int roomId, string uploadPath)

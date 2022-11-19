@@ -20,8 +20,8 @@ namespace AmdarisProject.Api.Controllers
         [HttpGet("{roomId}")]
         public async Task<IActionResult> GetImage([FromRoute] int roomId)
         {
-            throw new NotImplementedException();
-            //return File();
+            var image = await _imageService.GetImageAsync(roomId, _fileManagerOptions.Path);
+            return File(image.Image, image.ContentType, image.ImageName);
         }
 
         [HttpPost("{roomId}")]

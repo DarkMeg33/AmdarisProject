@@ -11,8 +11,8 @@ export class ImageService {
     private httpClient: HttpClient
   ) { }
 
-  public getImage(roomId: number): Observable<any> {
-    return this.httpClient.get(`/api/images/${roomId}`);
+  public getImage(roomId: number) {
+    return this.httpClient.get(`/api/images/${roomId}`, {responseType: 'blob'});
   }
 
   public createImage(fileForm: FormData, roomId: number): Observable<any> {
