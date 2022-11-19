@@ -12,6 +12,10 @@ export class RoomService {
     private httpClient: HttpClient
   ) { }
 
+  public getRoom(id: number): Observable<Room> {
+    return this.httpClient.get<Room>(`/api/rooms/${id}`);
+  }
+
   public createRoom(room: Room): Observable<Room> {
     return this.httpClient.post<Room>("/api/rooms", room);
   }

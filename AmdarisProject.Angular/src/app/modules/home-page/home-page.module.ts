@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { HostelsViewModule } from '../hostel/hostels-view/hostels-view.module';
 import { SectionViewModule } from '../section/section-view/section-view.module';
+import { RoomDataViewModule } from '../room/room-data-view/room-data-view.module';
 
 
 
@@ -15,7 +16,8 @@ import { SectionViewModule } from '../section/section-view/section-view.module';
   imports: [
     CommonModule,
     AngularMaterialModule,
-    HostelsViewModule
+    HostelsViewModule,
+    RoomDataViewModule
   ],
   exports: [
     HomePageComponent

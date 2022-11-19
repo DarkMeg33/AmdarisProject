@@ -14,5 +14,6 @@ namespace AmdarisProject.DataAccess.Interfaces
         Task CreateAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteByIdAsync(int id);
+        Task SaveChangesAsync();
     }
 }

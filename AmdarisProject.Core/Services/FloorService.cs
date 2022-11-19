@@ -22,7 +22,7 @@ namespace AmdarisProject.Core.Services
         {
             var floors = await _repository.GetAllAsync();
 
-            return floors.Select(floor => _mapper.Map<Floor, FloorDto>(floor)).ToList();
+            return _mapper.Map<IList<Floor>, IList<FloorDto>>(floors);
         }
 
         public async Task<FloorDto> GetFloorByIdAsync(int id)
@@ -42,6 +42,7 @@ namespace AmdarisProject.Core.Services
             var floor = _mapper.Map<Floor>(floorUpdateDto);
 
             await _repository.CreateAsync(floor);
+            await _repository.SaveChangesAsync();
 
             return _mapper.Map<Floor, FloorDto>(floor);
         }
@@ -57,6 +58,7 @@ namespace AmdarisProject.Core.Services
 
             _mapper.Map(floorUpdateDto, floor);
             await _repository.UpdateAsync(floor);
+            await _repository.SaveChangesAsync();
 
             return _mapper.Map<Floor, FloorDto>(floor);
         }
@@ -68,6 +70,7 @@ namespace AmdarisProject.Core.Services
             if (floor is null) throw new NotFoundException("Floor isn't exists.");
 
             await _repository.DeleteByIdAsync(id);
+            await _repository.SaveChangesAsync();
         }
     }
 }

@@ -7,7 +7,7 @@ using AmdarisProject.DataAccess.Extensions;
 
 namespace AmdarisProject.DataAccess.Repositories
 {
-    public class EFCoreRepository<T> : IRepository<T>, IDisposable where T : BaseEntity
+    public class EFCoreRepository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly DbContext _context;
         protected readonly DbSet<T> _dbSet;
@@ -54,25 +54,22 @@ namespace AmdarisProject.DataAccess.Repositories
         public async Task CreateAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
-            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(T entity)
         {
             _dbSet.Update(entity);
-            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteByIdAsync(int id)
         {
             T entity = await GetByIdAsync(id);
             _dbSet.Remove(entity);
-            await _context.SaveChangesAsync();
         }
 
-        public void Dispose()
+        public async Task SaveChangesAsync()
         {
-            _context.Dispose();
+            await _context.SaveChangesAsync();
         }
     }
 }

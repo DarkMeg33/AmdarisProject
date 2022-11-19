@@ -24,7 +24,7 @@ namespace AmdarisProject.Core.Services
         {
             var rooms = await _repository.GetAllAsync();
 
-            return rooms.Select(room => _mapper.Map<Room, RoomDto>(room)).ToList();
+            return _mapper.Map<IList<Room>, IList<RoomDto>>(rooms);
         }
 
         public async Task<RoomDto> GetRoomByIdAsync(int id)
@@ -44,6 +44,7 @@ namespace AmdarisProject.Core.Services
             var room = _mapper.Map<Room>(roomUpdateDto);
 
             await _repository.CreateAsync(room);
+            await _repository.SaveChangesAsync();
 
             return _mapper.Map<Room, RoomDto>(room);
         }
@@ -59,6 +60,7 @@ namespace AmdarisProject.Core.Services
 
             _mapper.Map(roomUpdateDto, room);
             await _repository.UpdateAsync(room);
+            await _repository.SaveChangesAsync();
 
             return _mapper.Map<Room, RoomDto>(room);
         }
@@ -71,6 +73,7 @@ namespace AmdarisProject.Core.Services
 
             await _imageService.DeleteImageAsync(id, imageUploadPath);
             await _repository.DeleteByIdAsync(id);
+            await _repository.SaveChangesAsync();
         }
     }
 }

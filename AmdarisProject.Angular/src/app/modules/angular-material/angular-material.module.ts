@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -35,7 +36,8 @@ const modules = [
   MatSnackBarModule,
   MatMenuModule,
   MatRadioModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatCardModule
 ]
 
 @NgModule({

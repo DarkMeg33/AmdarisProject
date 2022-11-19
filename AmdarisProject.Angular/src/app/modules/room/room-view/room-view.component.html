@@ -5,7 +5,9 @@
     <mat-list>
         <div *ngFor="let room of rooms">
             <mat-list-item>
-                Room: {{room.roomNumber}}
+                <div (click)="roomLinkClicked(room.id)">
+                    Room: {{room.roomNumber}}
+                </div>
                 <button mat-icon-button (click)="editRoom(room)">
                     <mat-icon color="primary">edit</mat-icon>
                 </button>

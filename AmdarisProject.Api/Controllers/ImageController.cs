@@ -1,6 +1,5 @@
 ﻿using AmdarisProject.Api.Infrastructure.Configurations;
 using AmdarisProject.Core.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -17,7 +16,14 @@ namespace AmdarisProject.Api.Controllers
             _imageService = imageService;
             _fileManagerOptions = fileManagerOptions.Value;
         }
-        
+
+        [HttpGet("{roomId}")]
+        public async Task<IActionResult> GetImage([FromRoute] int roomId)
+        {
+            throw new NotImplementedException();
+            //return File();
+        }
+
         [HttpPost("{roomId}")]
         public async Task CreateImage([FromForm] IFormFile file, [FromRoute] int roomId)
         {

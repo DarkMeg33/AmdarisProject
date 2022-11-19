@@ -23,7 +23,7 @@ namespace AmdarisProject.Core.Services
         {
             var hostels = await _repository.GetAllHostelsWithIncludeAsync();
 
-            return hostels.Select(hostel => _mapper.Map<Hostel, HostelDto>(hostel)).ToList();
+            return _mapper.Map<IList<Hostel>, IList<HostelDto>>(hostels);
         }
 
         public async Task<PaginationResult<HostelDto>> GetPaginatedHostelsAsync(PaginationRequest paginationRequest)
@@ -49,6 +49,7 @@ namespace AmdarisProject.Core.Services
             var hostel = _mapper.Map<Hostel>(hostelUpdateDto);
 
             await _repository.CreateAsync(hostel);
+            await _repository.SaveChangesAsync();
 
             return _mapper.Map<Hostel, HostelDto>(hostel);
         }
@@ -64,6 +65,7 @@ namespace AmdarisProject.Core.Services
 
             _mapper.Map(hostelUpdateDto, hostel);
             await _repository.UpdateAsync(hostel);
+            await _repository.SaveChangesAsync();
 
             return _mapper.Map<Hostel, HostelDto>(hostel);
         }
@@ -75,6 +77,7 @@ namespace AmdarisProject.Core.Services
             if (hostel is null) throw new NotFoundException("Hostel isn't exists.");
 
             await _repository.DeleteByIdAsync(id);
+            await _repository.SaveChangesAsync();
         }
     }
 }

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Room } from 'src/app/common/models/room/room';
-import { ImageService } from 'src/app/common/services/image.service';
+import { DataTransferService } from 'src/app/common/services/data-transfer.service';
 import { RoomService } from 'src/app/common/services/room.service';
 import { RoomEditComponent } from '../room-edit/room-edit.component';
 
@@ -26,10 +26,14 @@ export class RoomViewComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private roomService: RoomService,
-    private imageService: ImageService
+    private dataTranferService: DataTransferService
   ) { }
 
   ngOnInit(): void {
+  }
+
+  public roomLinkClicked(roomId: number) {
+    this.dataTranferService.SentData(roomId);
   }
 
   public roomChanged() {

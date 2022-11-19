@@ -22,7 +22,7 @@ namespace AmdarisProject.Core.Services
         {
             var sections = await _repository.GetAllAsync();
 
-            return sections.Select(section => _mapper.Map<Section, SectionDto>(section)).ToList();
+            return _mapper.Map<IList<Section>, IList<SectionDto>>(sections);
         }
 
         public async Task<SectionDto> GetSectionByIdAsync(int id)
@@ -42,6 +42,7 @@ namespace AmdarisProject.Core.Services
             var section = _mapper.Map<Section>(sectionUpdateDto);
 
             await _repository.CreateAsync(section);
+            await _repository.SaveChangesAsync();
 
             return _mapper.Map<Section, SectionDto>(section);
         }
@@ -57,6 +58,7 @@ namespace AmdarisProject.Core.Services
 
             _mapper.Map(sectionUpdateDto, section);
             await _repository.UpdateAsync(section);
+            await _repository.SaveChangesAsync();
 
             return _mapper.Map<Section, SectionDto>(section);
         }
@@ -68,6 +70,7 @@ namespace AmdarisProject.Core.Services
             if (section is null) throw new NotFoundException("Section isn't exists.");
 
             await _repository.DeleteByIdAsync(id);
+            await _repository.SaveChangesAsync();
         }
     }
 }

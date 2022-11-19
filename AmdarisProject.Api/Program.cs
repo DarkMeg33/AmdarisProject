@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers(o => o.Filters.Add(typeof(ApiExceptionFilterAttribute)));
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwagger();
 
@@ -49,7 +49,6 @@ builder.Services.AddScoped<IImageService, ImageService>();
 var app = builder.Build();
 
 app.UseCustomExceptionHandling();
-app.UseExceptionLogger();
 
 if (app.Environment.IsDevelopment())
 {

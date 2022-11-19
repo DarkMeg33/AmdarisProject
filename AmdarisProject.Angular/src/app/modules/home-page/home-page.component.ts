@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataTransferService } from 'src/app/common/services/data-transfer.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private dataTransferService: DataTransferService
+  ) { }
 
   public ngOnInit(): void {
   }

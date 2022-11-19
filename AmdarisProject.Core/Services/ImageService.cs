@@ -1,9 +1,13 @@
-﻿using AmdarisProject.Common.Exeptions;
+﻿using System.IO;
+using System;
+using System.Net;
+using AmdarisProject.Common.Exeptions;
 using AmdarisProject.Core.Interfaces;
 using AmdarisProject.DataAccess.Interfaces;
 using AmdarisProject.Domain;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AmdarisProject.Core.Services
 {
@@ -14,6 +18,28 @@ namespace AmdarisProject.Core.Services
         public ImageService(IRepository<Image> repository, IMapper mapper)
         {
             _repository = repository;
+        }
+
+        public async Task<IActionResult> GetImageAsync(int roomId, string uploadPath)
+        {
+            var image = await _repository.GetByIdAsync(roomId);
+
+            var fullPath = Path.Combine(uploadPath, image.Path);
+
+            var memory = new MemoryStream();
+
+            await using (var stream = new FileStream(fullPath, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+
+            memory.Position = 0;
+            var contentType = "APPLICATION/octet-stream";
+            var fileName = Path.GetFileName(fullPath);
+
+            throw new NotImplementedException();
+
+            // return File(memory, contentType, fileName);
         }
 
         public async Task CreateImageAsync(IFormFile file, int roomId, string uploadPath)
@@ -38,6 +64,7 @@ namespace AmdarisProject.Core.Services
                 Id = roomId,
                 Path = filePath
             });
+            await _repository.SaveChangesAsync();
         }
 
         public async Task UpdateImageAsync(IFormFile file, int roomId, string uploadPath)
