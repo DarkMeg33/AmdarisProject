@@ -15,13 +15,15 @@ namespace AmdarisProject.Core.Services
     {
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<Role> _roleManager;
         private readonly IMapper _mapper;
 
-        public AccountService(IMapper mapper, SignInManager<User> signInManager, UserManager<User> userManager)
+        public AccountService(IMapper mapper, SignInManager<User> signInManager, UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             _mapper = mapper;
             _signInManager = signInManager;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task<bool> RegisterUserAsync(UserRegisterDto userRegisterDto)
@@ -65,10 +67,12 @@ namespace AmdarisProject.Core.Services
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authOptions.Token));
             var credentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha512);
 
+            var roles = await _userManager.GetRolesAsync(existingUser);
+
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Name, userLoginDto.UserName),
-                new Claim(ClaimTypes.Role, "Admin")
+                new Claim(ClaimTypes.Role, roles[0])
             };
 
             var token = new JwtSecurityToken(

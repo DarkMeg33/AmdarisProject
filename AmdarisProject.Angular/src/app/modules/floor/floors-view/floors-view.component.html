@@ -1,6 +1,6 @@
 <div>
     <div>
-        <button mat-raised-button color="primary" (click)="editFloor()" style="margin-left: 30px;">Create floor</button>
+        <button mat-raised-button color="primary" (click)="editFloor()" style="margin-left: 30px;"  *ngIf="accountService.isAdmin()">Create floor</button>
     </div>
     <mat-list>
         <div *ngFor="let floor of floors">

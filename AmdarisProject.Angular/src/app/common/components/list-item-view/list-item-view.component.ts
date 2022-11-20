@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularMaterialModule } from '../../../modules/angular-material/angular-material.module';
 import { DeleteBtnComponent } from '../delete-btn/delete-btn.component';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-list-item-view',
@@ -30,7 +31,9 @@ export class ListItemViewComponent implements OnInit {
   @Output()
   onEdit: EventEmitter<void> = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    public accountService: AccountService
+  ) { }
 
   ngOnInit(): void {
   }

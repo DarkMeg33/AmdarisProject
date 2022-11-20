@@ -48,6 +48,8 @@ builder.Services.AddScoped<IImageService, ImageService>();
 
 var app = builder.Build();
 
+app.SeedData();
+
 app.UseCustomExceptionHandling();
 
 if (app.Environment.IsDevelopment())

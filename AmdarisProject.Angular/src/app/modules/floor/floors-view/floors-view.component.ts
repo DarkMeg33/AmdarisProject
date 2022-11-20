@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Floor } from 'src/app/common/models/floor/floor';
 import { Hostel } from 'src/app/common/models/hostel/hostel';
+import { AccountService } from 'src/app/common/services/account.service';
 import { FloorService } from 'src/app/common/services/floor.service';
 import { FloorEditComponent } from '../floor-edit/floor-edit.component';
 
@@ -25,7 +26,8 @@ export class FloorsViewComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private floorService: FloorService
+    private floorService: FloorService,
+    public accountService: AccountService
   ) { }
 
   ngOnInit(): void {

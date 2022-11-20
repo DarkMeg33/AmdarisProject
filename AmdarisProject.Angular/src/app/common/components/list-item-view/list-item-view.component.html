@@ -4,10 +4,10 @@
             <mat-icon>{{ isExpanded ? 'expand_more' : 'chevron_right' }}</mat-icon>
         </button>
         {{title}}
-        <button mat-icon-button (click)="onEditClicked()">
+        <button mat-icon-button (click)="onEditClicked()" *ngIf="accountService.isAdmin()">
             <mat-icon color="primary">edit</mat-icon>
         </button>
-        <app-delete-btn (onDelete)="onDeleteClicked()"></app-delete-btn>
+        <app-delete-btn (onDelete)="onDeleteClicked()"  *ngIf="accountService.isAdmin()"></app-delete-btn>
     </mat-list-item>
     <div style="margin-left:30px;" *ngIf="isExpanded">
        <ng-content></ng-content>

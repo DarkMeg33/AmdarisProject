@@ -13,6 +13,9 @@
             matInput placeholder="Enter password..." class="form-control" required> 
             <mat-error *ngIf="userName.invalid">Password is required</mat-error>
         </mat-form-field>
+        <div>
+            No account? <a routerLink="/account/register">Create one!</a>
+        </div>
         <button mat-raised-button color="primary" type="submit">Sign in</button>
     </form>
 </div>

@@ -1,6 +1,6 @@
 <div>
     <div>
-        <button mat-raised-button color="primary" (click)="editRoom()" style="margin-left: 30px;">Create room</button>
+        <button mat-raised-button color="primary" (click)="editRoom()" style="margin-left: 30px;" *ngIf="accountService.isAdmin()">Create room</button>
     </div>
     <mat-list>
         <div *ngFor="let room of rooms">
@@ -8,10 +8,10 @@
                 <div (click)="roomLinkClicked(room.id)">
                     Room: {{room.roomNumber}}
                 </div>
-                <button mat-icon-button (click)="editRoom(room)">
+                <button mat-icon-button (click)="editRoom(room)" *ngIf="accountService.isAdmin()">
                     <mat-icon color="primary">edit</mat-icon>
                 </button>
-                <app-delete-btn (onDelete)="deleteRoom(room.id)"></app-delete-btn>
+                <app-delete-btn (onDelete)="deleteRoom(room.id)" *ngIf="accountService.isAdmin()"></app-delete-btn>
             </mat-list-item>
             <mat-divider *ngIf="rooms?.at(-1) !== room"></mat-divider>
         </div>

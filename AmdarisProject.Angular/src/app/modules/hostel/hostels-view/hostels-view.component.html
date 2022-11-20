@@ -38,7 +38,7 @@
         </ng-template>
     </mat-list>
     <div class="paginator-container">
-        <button mat-raised-button color="primary" (click)="editHostel()">Create hostel</button>
+        <button mat-raised-button color="primary" (click)="editHostel()" *ngIf="accountService.isAdmin()">Create hostel</button>
         <mat-paginator [length]="paginationResult?.totalItems"
               [pageSize]="paginator?.pageSize"
               [pageSizeOptions]="[5, 10, 25, 100]"

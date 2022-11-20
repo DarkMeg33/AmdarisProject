@@ -1,6 +1,7 @@
 ﻿using AmdarisProject.Api.Infrastructure.Configurations;
 using AmdarisProject.Common.Dtos.Room;
 using AmdarisProject.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -36,6 +37,7 @@ namespace AmdarisProject.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> CreateRoom([FromBody] RoomUpdateDto roomUpdateDto)
         {
             if (!ModelState.IsValid)
@@ -49,6 +51,7 @@ namespace AmdarisProject.Api.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<RoomDto>> UpdateRoom(int id, [FromBody] RoomUpdateDto roomUpdateDto)
         {
             if (!ModelState.IsValid)
@@ -62,6 +65,7 @@ namespace AmdarisProject.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteRoom(int id)
         {
             await _roomService.DeleteRoomAsync(id, _fileManagerOptions.Path);

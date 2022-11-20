@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Section } from 'src/app/common/models/section/section';
+import { AccountService } from 'src/app/common/services/account.service';
 import { SectionService } from 'src/app/common/services/section.service';
 import { SectionEditComponent } from '../section-edit/section-edit.component';
 
@@ -24,7 +25,8 @@ export class SectionViewComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private sectionService: SectionService
+    private sectionService: SectionService,
+    public accountService: AccountService
   ) { }
 
   ngOnInit(): void {

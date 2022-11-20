@@ -1,5 +1,6 @@
 ﻿using AmdarisProject.Common.Dtos.Section;
 using AmdarisProject.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmdarisProject.Api.Controllers
@@ -32,6 +33,7 @@ namespace AmdarisProject.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> CreateSection([FromBody] SectionUpdateDto sectionUpdateDto)
         {
             if (!ModelState.IsValid)
@@ -45,6 +47,7 @@ namespace AmdarisProject.Api.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdateSection(int id, [FromBody] SectionUpdateDto sectionUpdateDto)
         {
             if (!ModelState.IsValid)
@@ -58,6 +61,7 @@ namespace AmdarisProject.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteSection(int id)
         {
             await _sectionService.DeleteSectionAsync(id);

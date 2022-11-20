@@ -1,5 +1,6 @@
 ﻿using AmdarisProject.Api.Infrastructure.Configurations;
 using AmdarisProject.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -25,12 +26,14 @@ namespace AmdarisProject.Api.Controllers
         }
 
         [HttpPost("{roomId}")]
+        [Authorize(Roles = "admin")]
         public async Task CreateImage([FromForm] IFormFile file, [FromRoute] int roomId)
         {
             await _imageService.CreateImageAsync(file, roomId, _fileManagerOptions.Path);
         }
 
         [HttpPut("{roomId}")]
+        [Authorize(Roles = "admin")]
         public async Task UpdateImage([FromForm] IFormFile file, [FromRoute] int roomId)
         {
             await _imageService.UpdateImageAsync(file, roomId, _fileManagerOptions.Path);

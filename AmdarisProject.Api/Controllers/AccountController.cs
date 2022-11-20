@@ -1,7 +1,6 @@
 ﻿using AmdarisProject.Api.Infrastructure.Configurations;
 using AmdarisProject.Common.Dtos.User;
 using AmdarisProject.Core.Interfaces;
-using AmdarisProject.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;

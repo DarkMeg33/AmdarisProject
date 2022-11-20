@@ -10,6 +10,7 @@ import { PaginationRequest } from 'src/app/common/models/pagination/pagination-r
 import { PaginationResult } from 'src/app/common/models/pagination/pagination-result';
 import { SortDirection } from 'src/app/common/models/pagination/sort-direction';
 import { SortingRequest } from 'src/app/common/models/pagination/sorting-request';
+import { AccountService } from 'src/app/common/services/account.service';
 import { HostelService } from 'src/app/common/services/hostel.service';
 import { HostelEditComponent } from '../hostel-edit/hostel-edit.component';
 
@@ -33,7 +34,8 @@ export class HostelsViewComponent implements OnInit, AfterViewInit {
   constructor(
     private hostelService: HostelService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public accountService: AccountService
   ) {}
 
   ngAfterViewInit(): void {

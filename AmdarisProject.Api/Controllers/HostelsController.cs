@@ -1,6 +1,8 @@
 ﻿using AmdarisProject.Common.Dtos.Hostel;
 using AmdarisProject.Common.Models;
 using AmdarisProject.Core.Interfaces;
+using AmdarisProject.Domain.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AmdarisProject.Api.Controllers
@@ -40,6 +42,7 @@ namespace AmdarisProject.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> CreateHostel([FromBody] HostelUpdateDto hostelUpdateDto)
         {
             if (!ModelState.IsValid)
@@ -53,6 +56,7 @@ namespace AmdarisProject.Api.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdateHostel(int id, [FromBody] HostelUpdateDto hostelUpdateDto)
         {
             if (!ModelState.IsValid)
@@ -66,6 +70,7 @@ namespace AmdarisProject.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteHostel(int id)
         {
             await _hostelService.DeleteHostelAsync(id);
