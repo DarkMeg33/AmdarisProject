@@ -6,7 +6,7 @@
         <div *ngFor="let floor of floors">
             <app-list-item-view 
                 [title]="'Floor: ' + floor.floorNumber.toString()" 
-                [canExpand]="floor.sections?.length! > 0"
+                [canExpand]="floor.sections?.length! > 0  || accountService.isAdmin()"
                 (onDelete)="deleteFloor(floor.id)"
                 (onEdit)="editFloor(floor)">
                 <app-section-view [sections]="floor?.sections" (onSectionChange)="floorChanged()" [floorId]="floor.id"></app-section-view>

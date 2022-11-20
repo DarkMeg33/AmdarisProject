@@ -6,7 +6,7 @@
         <div *ngFor="let section of sections">
             <app-list-item-view 
                 [title]="'Section: ' + section.sectionNumber.toString()" 
-                [canExpand]="section.rooms?.length! > 0"
+                [canExpand]="section.rooms?.length! > 0  || accountService.isAdmin()"
                 (onDelete)="deleteSection(section.id)"
                 (onEdit)="editSection(section)">
                 <app-room-view 

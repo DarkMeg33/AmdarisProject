@@ -1,12 +1,23 @@
 <mat-card>
     <mat-card-header>
         <mat-card-title>
-            room-data-view works! RoomId: {{ roomId }}
+            Room: <span *ngIf="room">{{ room.roomNumber }} </span>
         </mat-card-title>
     </mat-card-header>
     <mat-divider></mat-divider>
     <img [src]="image" mat-card-image alt="">
-    <mat-card-content>
-        <p>room-data-view works! RoomId: {{ roomId }}</p>
+    <mat-card-content *ngIf="room; else noContent">
+        <mat-list>
+            <mat-list-item>Bed count: 3</mat-list-item>
+            <mat-list-item>Bedside table count: 3</mat-list-item>
+            <mat-list-item>Table count: 1</mat-list-item>
+            <mat-list-item>Has cupboard: true</mat-list-item>
+            <mat-list-item>Has repair: true</mat-list-item>
+            <mat-list-item>Price: 1800</mat-list-item>
+            <mat-list-item><button mat-raised-button type="button" color="primary">Buy</button></mat-list-item>
+        </mat-list>
     </mat-card-content>
+    <ng-template #noContent>
+        No content
+    </ng-template>
 </mat-card>

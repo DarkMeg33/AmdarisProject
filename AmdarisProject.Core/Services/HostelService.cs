@@ -64,7 +64,6 @@ namespace AmdarisProject.Core.Services
             }
 
             _mapper.Map(hostelUpdateDto, hostel);
-            await _repository.UpdateAsync(hostel);
             await _repository.SaveChangesAsync();
 
             return _mapper.Map<Hostel, HostelDto>(hostel);

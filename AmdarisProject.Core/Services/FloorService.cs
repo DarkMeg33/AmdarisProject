@@ -57,7 +57,6 @@ namespace AmdarisProject.Core.Services
             }
 
             _mapper.Map(floorUpdateDto, floor);
-            await _repository.UpdateAsync(floor);
             await _repository.SaveChangesAsync();
 
             return _mapper.Map<Floor, FloorDto>(floor);

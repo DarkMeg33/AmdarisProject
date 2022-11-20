@@ -28,7 +28,7 @@ namespace AmdarisProject.Core.Services
 
         public async Task<bool> RegisterUserAsync(UserRegisterDto userRegisterDto)
         {
-            var existingUser =await _userManager.FindByNameAsync(userRegisterDto.UserName);
+            var existingUser = await _userManager.FindByNameAsync(userRegisterDto.UserName);
 
             if (existingUser is not null)
             {
@@ -38,6 +38,7 @@ namespace AmdarisProject.Core.Services
             var user = _mapper.Map<UserRegisterDto, User>(userRegisterDto);
 
             var identityResult = await _userManager.CreateAsync(user, userRegisterDto.Password);
+            await _userManager.AddToRoleAsync(user, "user");
 
             if (!identityResult.Succeeded)
             {

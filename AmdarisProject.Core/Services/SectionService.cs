@@ -57,7 +57,6 @@ namespace AmdarisProject.Core.Services
             }
 
             _mapper.Map(sectionUpdateDto, section);
-            await _repository.UpdateAsync(section);
             await _repository.SaveChangesAsync();
 
             return _mapper.Map<Section, SectionDto>(section);

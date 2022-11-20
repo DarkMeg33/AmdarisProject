@@ -28,7 +28,7 @@
         <ng-template #hostelsView >
             <div *ngFor="let hostel of hostels">
                 <app-list-item-view [title]="'Hostel: ' + hostel.hostelNumber.toString()" 
-                                    [canExpand]="hostel?.floors?.length! > 0"
+                                    [canExpand]="hostel?.floors?.length! > 0 || accountService.isAdmin()"
                                     (onDelete)="deleteHostel(hostel.id)"
                                     (onEdit)="editHostel(hostel)">
                     <app-floors-view [floors]="hostel?.floors" [hostelId]="hostel.id" (onFloorChange)="setHostels()"></app-floors-view>

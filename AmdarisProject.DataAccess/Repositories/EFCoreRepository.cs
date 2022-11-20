@@ -56,11 +56,6 @@ namespace AmdarisProject.DataAccess.Repositories
             await _dbSet.AddAsync(entity);
         }
 
-        public async Task UpdateAsync(T entity)
-        {
-            _dbSet.Update(entity);
-        }
-
         public async Task DeleteByIdAsync(int id)
         {
             T entity = await GetByIdAsync(id);
